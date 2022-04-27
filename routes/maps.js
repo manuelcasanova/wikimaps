@@ -22,9 +22,9 @@ module.exports = (db) => {//rendering a newmap page
   });
 
 router.get('/', (req, res) => {
-  db.query(`SELECT * from maps`)
+  db.query(`select * from maps;`)
   .then(data => {
-    const newMap = data.rows;
+    const maps = data.rows;
     res.json({ maps });
   })
   .catch(err => {
