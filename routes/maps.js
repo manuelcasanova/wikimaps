@@ -21,6 +21,24 @@ module.exports = (db) => {//rendering a newmap page
       res.render("new");
   });
 
+router.get('/', (req, res) => {
+  db.query(`SELECT * from maps`)
+  .then(data => {
+    const newMap = data.rows;
+    res.json({ maps });
+  })
+  .catch(err => {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+});
+
+
+
+
+
   router.post('/', (req, res) => {
     const addMap = function(map) {
     const queryParams = [
