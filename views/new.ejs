@@ -49,15 +49,29 @@
 }).addTo(map);
     </script>
   </main>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Preview</th>
-        <th scope="col">Title</th>
-      </tr>
-    </thead>
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="exampleInputLocation">Location</label>
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
+      <!--  -->
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name for your map">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" placeholder="Type description">
+    </div>
 
-  </table>
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input type="url" class="form-control" id="image" placeholder="http://">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
 
 
 
