@@ -53,7 +53,18 @@ app.use("/", profileRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  db.query(`select maps.id, maps.title from maps;`)
+  .then(data => {
+    const maps = data.rows;
+    // res.json({ maps });
+    res.render("index", { maps });
+  })
+  .catch(err => {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
 
 app.listen(PORT, () => {
