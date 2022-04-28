@@ -35,9 +35,6 @@
 
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
-
-
 </head>
 
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
@@ -55,8 +52,6 @@
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
 
-// const form = "<form method='POST' action='/maps'><label for='title'>Place:</label><br> <input id='title' name='title' type='text' placeholder='Title'><br></form>";
-
 var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
@@ -68,7 +63,6 @@ function onMapClick(e) {// event handler
     popup
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
-
         .openOn(map);
 }
 
