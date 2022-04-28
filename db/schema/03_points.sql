@@ -9,5 +9,6 @@ CREATE TABLE points (
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   created_at DATE DEFAULT CURRENT_DATE,
   deleted_at DATE DEFAULT CURRENT_DATE,
-  geolocation POINT
+  latitude DECIMAL,
+  longitude DECIMAL
 );
