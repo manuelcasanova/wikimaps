@@ -67,7 +67,23 @@ var popup = L.popup();//defining a var to connect to a leaflet library
 //   image VARCHAR(255),
 
 function onMapClick(e) {// event handler
-  const form ="<form method='POST' action='/points'><label for='title'>Pin name:</label><br><input id='title' name='title' type='text'><br><label for='description'>Description:</label><br><input id='description' name='description' type='text'><br><label for='image'>Image URL:</label><br><input id='image' name='image' type='url' placeholder='http://'><br><input name='latitude' type='hidden' value='${e.latlng.lat}'><input name='longitude' type='hidden' value='${e.latlng.lng}'><input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='button' value='Create a pin'><br></form>"
+  const form =`<form method='POST' action='/maps/points'>
+    <label for='title'>Pin name:</label>
+    <br>
+    <input id='title' name='title' type='text'><br>
+    <label for='description'>Description:</label>
+    <br>
+    <input id='description' name='description' type='text'>
+    <br>
+    <label for='image'>Image URL:</label>
+    <br>
+    <input id='image' name='image' type='url' placeholder='http://'>
+    <br>
+    <input name='latitude' type='hidden' value='${e.latlng.lat}'>
+    <input name='longitude' type='hidden' value='${e.latlng.lng}'>
+    <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
+    <br>
+    </form>`
 
   var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
     popup
