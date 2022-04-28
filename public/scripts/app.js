@@ -4,8 +4,8 @@ const showAllMaps = function(mapsData) {
 const $maps = $(
   `<tbody>
       <tr>
-        <td><img src=${nonsense/* MapTable*/}></td>
-        <td>${nonsense/*MapTitle*/}</td>
+        <td>${maps.id}</td>
+        <td>${maps.title}</td>
       </tr>
   </tbody>
   `
