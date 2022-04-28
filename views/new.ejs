@@ -47,6 +47,7 @@
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
+
 var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();//a pop up on the pin
 
@@ -86,10 +87,6 @@ map.on('click', onMapClick);
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-
-
-
-
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
