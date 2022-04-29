@@ -53,10 +53,11 @@ app.use("/", profileRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  db.query(`select maps.id, maps.title from maps;`)
+  db.query(`select maps.id, maps.title, maps.description from maps;`)
   .then(data => {
     const maps = data.rows;
-    // res.json({ maps });
+    console.log('this is maps: ', maps);
+    console.log('maps destructured: ', {maps});
     res.render("index", { maps });
   })
   .catch(err => {
