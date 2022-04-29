@@ -15,16 +15,35 @@ const addPin = function(db, pin) {
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
+
+
 module.exports = (db) => {
-  router.get("/points", (req, res) => {
-   res.render("points")
-  });
+  // router.get("/points", (req, res) => {
+  //  res.render("points")
+  // });
   router.post("/points", (req, res) => {//post method to save points to the data base, the next step is to write the function(step2)
     addPin(db, req.body).then(result => {
       console.log(result)
-      res.render("points")
+      // res.render("points")
     })
   })
+  router.get("/points", (req, res) => {
+    db.query(`select points.title, points.description from points;`)
+    .then(data => {
+      const points = data.rows;
+      console.log("this is points: ", points)
+      // res.json({ maps });
+      res.render("points", { points });
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
+
+
   return router;
 };
 
