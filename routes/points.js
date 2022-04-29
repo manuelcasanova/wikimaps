@@ -1,6 +1,5 @@
 const express = require('express');
 const router  = express.Router();
-
 //step2
 const addPin = function(db, pin) {
   const queryParams = [pin.title, pin.description, pin.image, pin.latitude, pin.longitude];
@@ -43,6 +42,16 @@ module.exports = (db) => {
   router.get("/points", (req, res) => {//to get the points from db
     db.query(`select points.id, points.title, points.description, points.image, points.created_by, points.map_id, points.created_at, points.deleted_at from points;`)
     .then(data => {
+
+
+
+
+
+
+
+
+
+
       const points = data.rows;
       console.log("this is points: ", points)
       // res.json({ maps });
@@ -55,7 +64,6 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   });
-
   return router;
 };
 
