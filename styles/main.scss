@@ -1,10 +1,13 @@
 body {
 
-  min-height: 100vh;
+  min-height: 90vh;
+
 }
 
 #map {
   height: 100%;
+  margin-right: 3vw;
+  margin-left: 3vw;
 }
 
 nav {
@@ -18,7 +21,5 @@ header {
 }
 
 main {
-  background-color: rgb(245, 232, 208);
   height: 50vh;
-  width: 90vw;
 }
