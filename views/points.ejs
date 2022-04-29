@@ -96,7 +96,27 @@ map.on('click', onMapClick);
 // Leaflet Search
 L.Control.geocoder().addTo(map);
     </script>
-  </main>
+</main>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const point of points) {%>
+    <tr>
+      <td><%=point.title%></td>
+      <td><%=point.description%></td>
+    </tr>
+    <%}%>
+  </tbody>
+
+</table>
+
+
 
 
   <!-- Bootstrap JS -->
