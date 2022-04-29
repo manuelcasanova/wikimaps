@@ -16,7 +16,7 @@ db.connect();
 
 const addMap = function(db, map) {//adding map to db, so far without a user, used in a "post" below
   const queryParams = [map.title, map.description, 1];
-  //we are passing 1 as a created by for now, but we need to change to a dynamic user id later
+  //we are passing 1 as a "created_by" for now, but we need to change to a dynamic user id later
   let queryString = ` INSERT INTO maps (
     title,
     description,
