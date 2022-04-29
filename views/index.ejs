@@ -28,7 +28,22 @@
     <h3>Welcome message here</h3>
   </main>
   <table class="table">
- <div>List of maps here</div>
+    <thead>
+      <tr>
+        <th scope="col">Preview</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const map of maps) {%>
+      <tr>
+        <td><%=map.id%></td>
+        <td><%=map.title%></td>
+        <td><%=map.description%></td>
+      </tr>
+      <%}%>
+    </tbody>
 
   </table>
 
