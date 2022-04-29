@@ -30,64 +30,36 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
 
-   <!-- Leaflet Geocoder CSS -->
-   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
-   <!-- Leaflet Geocoder JS -->
-  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 </head>
 
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
-  <main style="margin: 1em;">
-    <div id="map"></div>
-    <script>var map = L.map('map').setView([51.505, -0.09], 6);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
-}).addTo(map);
 
-var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
-
-var popup = L.popup();//defining a var to connect to a leaflet library
-
-function onMapClick(e) {// event handler
-  var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
-// Leaflet Search
-L.Control.geocoder().addTo(map);
-    </script>
-  </main>
-  <form action="/maps/new" method="post">
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="exampleInputLocation">Location</label>
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
+      <!--  -->
+    </div>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" name="title" class="form-control" id="name" placeholder="Name for your map">
+      <input type="text" class="form-control" id="name" placeholder="Name for your map">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" name="description" class="form-control" id="description" placeholder="Type description">
+      <input type="text" class="form-control" id="description" placeholder="Type description">
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label for="image">Image URL</label>
-      <input type="url" name="description" class="form-control" id="image" placeholder="http://">
-    </div> -->
+      <input type="url" class="form-control" id="image" placeholder="http://">
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -95,4 +67,3 @@ L.Control.geocoder().addTo(map);
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-

@@ -42,7 +42,6 @@ const pointRoutes = require("./routes/points");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
-
 app.use("/maps", mapRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/maps", pointRoutes(db));
@@ -52,10 +51,11 @@ app.use("/maps", pointRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  db.query(`select maps.id, maps.title from maps;`)
+  db.query(`select maps.id, maps.title, maps.description from maps;`)
   .then(data => {
     const maps = data.rows;
-    // res.json({ maps });
+    console.log('this is maps: ', maps);
+    console.log('maps destructured: ', {maps});
     res.render("index", { maps });
   })
   .catch(err => {
