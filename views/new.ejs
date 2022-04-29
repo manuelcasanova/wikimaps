@@ -35,9 +35,6 @@
 
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
-
-
 </head>
 
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
@@ -45,7 +42,7 @@
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
     <div id="map"></div>
-    <script>var map = L.map('map').setView([51.505, -0.09], 4);
+    <script>var map = L.map('map').setView([51.505, -0.09], 6);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -55,8 +52,9 @@
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
 
-var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();//a pop up on the pin
+var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
+marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
 
 var popup = L.popup();//defining a var to connect to a leaflet library
 
@@ -75,11 +73,6 @@ L.Control.geocoder().addTo(map);
   </main>
   <form action="/" method="post">
     <div class="form-group">
-      <label for="exampleInputLocation">Location</label>
-      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
-      <!--  -->
-    </div>
-    <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Name for your map">
     </div>
@@ -95,10 +88,6 @@ L.Control.geocoder().addTo(map);
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-
-
-
-
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
