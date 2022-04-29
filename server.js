@@ -43,7 +43,6 @@ const profileRoutes = require("./routes/profile");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
 app.use("/maps", mapRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/points", pointsRoutes(db));
