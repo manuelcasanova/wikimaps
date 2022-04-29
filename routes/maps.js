@@ -21,6 +21,10 @@ module.exports = (db) => {//rendering a newmap page
       res.render("new");
   });
 
+  router.get("/viewMap", (req, res) => {
+    res.render("viewMap");
+  });
+
 router.get('/', (req, res) => {
   db.query(`select * from maps;`)
   .then(data => {
