@@ -21,9 +21,25 @@ module.exports = (db) => {//rendering a newmap page
       res.render("new");
   });
 
-  router.get("/viewMap", (req, res) => {
-    res.render("viewMap");
+  router.get("/:id", (req, res) => {
+    const mapId = req.params.id
+    db.query(`SELECT *
+    FROM maps
+    JOIN points ON maps.id = points.map_id
+    WHERE maps.id = $1`, [mapId])
+    .then(data => {
+      console.log(data)
+      res.render("viewMap");
+    }).catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+
   });
+// redirects from map title
 
 router.get('/', (req, res) => {
   db.query(`select * from maps;`)
