@@ -71,20 +71,20 @@ map.on('click', onMapClick);
 L.Control.geocoder().addTo(map);
     </script>
   </main>
-  <form action="/" method="post">
+  <form action="/maps/new" method="post">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Name for your map">
+      <input type="text" name="title" class="form-control" id="name" placeholder="Name for your map">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" placeholder="Type description">
+      <input type="text" name="description" class="form-control" id="description" placeholder="Type description">
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="image">Image URL</label>
-      <input type="url" class="form-control" id="image" placeholder="http://">
-    </div>
+      <input type="url" name="description" class="form-control" id="image" placeholder="http://">
+    </div> -->
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
