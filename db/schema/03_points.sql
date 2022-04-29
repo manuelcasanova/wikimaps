@@ -8,7 +8,7 @@ CREATE TABLE points (
   created_by INTEGER REFERENCES users(id) ON DELETE CASCADE,
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   created_at DATE DEFAULT CURRENT_DATE,
-  deleted_at DATE DEFAULT CURRENT_DATE,
+  deleted_at DATE DEFAULT NULL,
   latitude DECIMAL,
   longitude DECIMAL
 );
