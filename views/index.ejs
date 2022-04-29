@@ -39,7 +39,8 @@
       <% for (const map of maps) {%>
       <tr>
         <td><%=map.id%></td>
-        <td><%=map.title%></td>
+
+        <td><a href="/maps/<%= map.id %>"><%=map.title%></td>
         <td><%=map.description%></td>
       </tr>
       <%}%>
