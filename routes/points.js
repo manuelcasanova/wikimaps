@@ -15,7 +15,11 @@ const addPin = function(db, pin) {
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
-
+const deletePin = function(db, id) {
+  const queryParams = [id];
+  let queryString = `DELETE FROM points WHERE id = $1 RETURNING *`;
+  return db.query(queryString, queryParams).then((res) => res.rows[0]);
+};
 
 module.exports = (db) => {
   router.post("/points", (req, res) => {//post method to save points to the data base, the next step is to write the function(step2)
@@ -24,6 +28,14 @@ module.exports = (db) => {
       res.redirect("points") //Once a pin is added it reloads the page and shows the pin at the bottom
     })
   })
+
+  router.post("/points/:id/delete", (req, res) => {
+    deletePin(db, req.params.id).then(result => {
+     res.redirect("/maps/points") //Once a pin is removed it reloads the page
+   })
+ })
+
+
   router.get("/points", (req, res) => {//to get the points from db
     db.query(`select points.title, points.description from points;`)
     .then(data => {
