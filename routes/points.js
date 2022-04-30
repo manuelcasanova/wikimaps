@@ -41,7 +41,7 @@ module.exports = (db) => {
 
 
   router.get("/points", (req, res) => {//to get the points from db
-    db.query(`select points.id, points.title, points.description, points.image, points.created_by, points.map_id, points.created_at, points.deleted_at from points;`)
+    db.query(`select points.latitude, points.longitude, points.id, points.title, points.description, points.image, points.created_by, points.map_id, points.created_at, points.deleted_at from points;`)
     .then(data => {
       const points = data.rows;
       console.log("this is points: ", points)

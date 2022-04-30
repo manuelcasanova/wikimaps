@@ -35,9 +35,20 @@
 
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
-
-
+  <script>var points = <%- JSON.stringify(points); %>//creates points var inside java script from ejs
+  //create an add to map function
+  //it takes it a point
+  $(function() {//$ is document ready
+    for (let point of points) {
+      var marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
+      marker.bindPopup(`<img src="${point.image}"/>`);//helper function from leaflet to bind a pop up to an event mouse click
+    }
+    //loop the points
+    //create a marker for each point
+    //add it to the map .addTo(map)
+    console.log(points);//to see array with points in console
+  });
+  </script>
 </head>
 
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
@@ -57,8 +68,8 @@
 
 
 
-var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
-marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
+//var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
+//marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
 
 var popup = L.popup();//defining a var to connect to a leaflet library
 
@@ -67,6 +78,7 @@ var popup = L.popup();//defining a var to connect to a leaflet library
 //   image VARCHAR(255),
 
 function onMapClick(e) {// event handler
+  //a form to add pins below
   const form =`<form method='POST' action='/maps/points'>
     <label for='title'>Pin name:</label>
     <br>
