@@ -89,10 +89,15 @@ function onMapClick(e) {// event handler
     popup
         .setLatLng(e.latlng)
         .setContent(form)
-        .openOn(map);
+        .openOn(map)//pop up opens on the map after clicking
+        .on('remove', function() {//as event is taking place trigger the function removing a marker
+          marker.remove()
+        });
 }
 
 map.on('click', onMapClick);
+
+
 // Leaflet Search
 L.Control.geocoder().addTo(map);
     </script>
