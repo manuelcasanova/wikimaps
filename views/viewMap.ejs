@@ -36,36 +36,29 @@
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
-  <main style="margin: 1em;">
-    <div id="map"></div>
-    <script>var map = L.map('map').setView([51.505, -0.09], 6);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
-}).addTo(map);
-</script>
-  </main>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Preview</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
 
-      <tr>
-        <td>image here</td>
-        <td>title here</td>
-        <td>description here</td>
-      </tr>
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="exampleInputLocation">Location</label>
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
+      <!--  -->
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name for your map">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" placeholder="Type description">
+    </div>
 
-    </tbody>
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input type="url" class="form-control" id="image" placeholder="http://">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
 
   <!-- Bootstrap JS -->

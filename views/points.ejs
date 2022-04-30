@@ -54,18 +54,12 @@
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
-
-
-
 var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
 marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
-
 var popup = L.popup();//defining a var to connect to a leaflet library
-
 // title VARCHAR(255) NOT NULL,
 //   description TEXT NOT NULL,
 //   image VARCHAR(255),
-
 function onMapClick(e) {// event handler
   const form =`<form method='POST' action='/maps/points'>
     <label for='title'>Pin name:</label>
@@ -84,14 +78,12 @@ function onMapClick(e) {// event handler
     <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
     <br>
     </form>`
-
   var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
     popup
         .setLatLng(e.latlng)
         .setContent(form)
         .openOn(map);
 }
-
 map.on('click', onMapClick);
 // Leaflet Search
 L.Control.geocoder().addTo(map);
@@ -101,31 +93,15 @@ L.Control.geocoder().addTo(map);
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">Image</th>
-      <th scope="col">Created by</th>
-      <th scope="col">Map ID</th>
-      <th scope="col">Created at</th>
-      <th scope="col">Deleted at</th>
     </tr>
   </thead>
   <tbody>
     <% for (const point of points) {%>
     <tr>
-      <td><%=point.id%></td>
       <td><%=point.title%></td>
       <td><%=point.description%></td>
-      <td><img src="<%=point.image%>" alt="<%=point.title%> picture" style="width: 40px;"></td>
-      <td><%=point.created_by%></td>
-      <td><%=point.map_id%></td>
-      <td><%=point.created_at%></td>
-      <td><%=point.deleted_at%></td>
-
-      <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
-        <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
-      </form></td>
     </tr>
     <%}%>
   </tbody>
@@ -133,7 +109,6 @@ L.Control.geocoder().addTo(map);
 </table>
 
 
-  </main>
 
 
   <!-- Bootstrap JS -->
