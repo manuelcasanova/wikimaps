@@ -4,11 +4,11 @@ CREATE TABLE points (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  image VARCHAR(255),
+  image VARCHAR(455),
   created_by INTEGER REFERENCES users(id) ON DELETE CASCADE,
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   created_at DATE DEFAULT CURRENT_DATE,
-  deleted_at DATE DEFAULT CURRENT_DATE,
+  deleted_at DATE DEFAULT NULL,
   latitude DECIMAL,
   longitude DECIMAL
 );
