@@ -29,11 +29,13 @@ module.exports = (db) => {
       `SELECT *
     FROM maps
     JOIN points ON maps.id = points.map_id
-    WHERE maps.id = $1`, [mapId]
+    WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {
-        console.log(data);
-        res.render("viewMap");
+
+        const mapPoints = data.rows;
+        console.log('DESTRUCTURED: ', { mapPoints });
+        res.render("viewMap", { mapPoints });
       })
       .catch((err) => {
         console.log(err);
