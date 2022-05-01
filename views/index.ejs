@@ -30,7 +30,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Preview</th>
+        <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
       </tr>
@@ -41,6 +41,8 @@
         <td><%=map.id%></td>
         <td><%=map.title%></td>
         <td><%=map.description%></td>
+        <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
+          <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
       </tr>
       <%}%>
     </tbody>
