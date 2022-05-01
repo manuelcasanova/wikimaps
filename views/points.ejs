@@ -36,17 +36,24 @@
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
   <script>var points = <%- JSON.stringify(points); %>//creates points var inside java script from ejs
-  //create an add to map function
-  //it takes it a point
+  //https://stackoverflow.com/questions/11024840/ejs-versus
   $(function() {//$ is document ready
     for (let point of points) {
       var marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
-      marker.bindPopup(`<img src="${point.image}"/>`);//helper function from leaflet to bind a pop up to an event mouse click
+      marker.bindPopup(`
+      <div><b>${point.title}</b><div>
+      <div style="padding-top: 10px; padding-bottom: 10px">${point.description}</div>
+      <div><img src="${point.image}" style="height: 60px; display: block;
+      margin-left: auto; margin-right: auto;"/></div>
+      `);//helper function from leaflet to bind a pop up to an event mouse click
     }
+
+    //create an add to map functions
+    //it takes a point
     //loop the points
     //create a marker for each point
-    //add it to the map .addTo(map)
-    console.log(points);//to see array with points in console
+    //add it to the map with .addTo(map)
+    console.log(points);//to see array with points in your browser console
   });
   </script>
 </head>
@@ -67,18 +74,12 @@
 }).addTo(map);
 
 
-
-//var marker = L.marker([51.5, -0.09]).addTo(map);//making anew marker with Leaflet library
+//var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
 //marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
 
 var popup = L.popup();//defining a var to connect to a leaflet library
 
-// title VARCHAR(255) NOT NULL,
-//   description TEXT NOT NULL,
-//   image VARCHAR(255),
-
 function onMapClick(e) {// event handler
-  //a form to add pins below
   const form =`<form method='POST' action='/maps/points'>
     <label for='title'>Pin name:</label>
     <br>
@@ -104,11 +105,14 @@ function onMapClick(e) {// event handler
         .openOn(map)//pop up opens on the map after clicking
         .on('remove', function() {//as event is taking place trigger the function removing a marker
           marker.remove()
+          //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
+
         });
 }
 
-map.on('click', onMapClick);
 
+
+map.on('click', onMapClick);
 
 // Leaflet Search
 L.Control.geocoder().addTo(map);
