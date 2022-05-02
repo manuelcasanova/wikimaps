@@ -41,7 +41,7 @@
 
     <header>
       <% for (const map of mapPoints) {%>
-      <h2 id="map_title"><%= map.title %></h2>
+      <h2 id="map_title"><%= map.map_title %></h2>
       <%}%>
     </header>
 
@@ -69,9 +69,9 @@
     <tbody>
       <% for (const point of mapPoints) {%>
       <tr>
-        <td><%=point.title%></td>
-        <td><%=point.description%></td>
-        <td><%=point.created_by%></td>
+        <td><%=point.point_title%></td>
+        <td><%=point.point_description%></td>
+        <td><%=point.point_created_by%></td>
       </tr>
       <%}%>
     </tbody>
