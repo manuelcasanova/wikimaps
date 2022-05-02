@@ -26,7 +26,6 @@ const addMap = function(db, map) {//adding map to db, so far without a user, use
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
-
 module.exports = (db) => {//rendering a newmap page
   router.get("/new", (req, res) => {//app.use("/maps", mapRoutes(db)); from server file is a base, then we add /new
       res.render("new");
@@ -42,6 +41,7 @@ module.exports = (db) => {//rendering a newmap page
       res.redirect("points")
     })
   })
+
   return router;
 };
 

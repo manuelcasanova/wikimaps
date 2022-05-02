@@ -16,7 +16,7 @@ const addPin = function(db, pin) {
 };
 
 
-
+//pin deleting
 const deletePin = function(db, id) {
   const queryParams = [id];
   let queryString = `DELETE FROM points WHERE id = $1 RETURNING *`;
