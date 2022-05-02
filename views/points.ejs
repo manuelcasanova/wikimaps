@@ -40,6 +40,9 @@
   $(function() {//$ is document ready
     for (let point of points) {
       var marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
+      marker.on('click', () =>  {
+        map.setView([point.latitude, point.longitude], 5)
+      });
       marker.bindPopup(`
       <div><b>${point.title}</b><div>
       <div style="padding-top: 10px; padding-bottom: 10px">${point.description}</div>
@@ -63,14 +66,24 @@
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
     <div id="map"></div>
-    <script>var map = L.map('map').setView([51.505, -0.09], 2.5);
+    <script>
+      //setting starting point for when points are defined (we will use the very first point coordinates)
+      // and for when the points do not exist in a given map
+      let starting = points.length > 0 ? [points[0].latitude, points[0].longitude] : [43.64249365536619, -79.38716085857133]
+      var map = L.map('map').setView(starting, 2.5);
+    // map.on('popupopen', function (popup) {
+    //   map.setZoom(5);
+    // });
+    //when we are closing a pop up we want to zoom out
+    map.on('popupclose', function (popup) {
+      map.setZoom(2.5);
+    });
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 100,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    zoomSnap: 0.25,
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
 
@@ -150,16 +163,6 @@ L.Control.geocoder().addTo(map);
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
       </form>
     </tr>
-
-
-
-
-
-
-
-
-
-
     <%}%>
   </tbody>
 </table>
