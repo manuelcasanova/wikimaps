@@ -102,7 +102,8 @@ function onMapClick(e) {// event handler
     <br>
     </form>`
 
-  var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
+  var marker = L.marker(e.latlng)
+  .addTo(map);//take an event data, create a marker
     popup
         .setLatLng(e.latlng)
         .setContent(form)
@@ -110,12 +111,8 @@ function onMapClick(e) {// event handler
         .on('remove', function() {//as event is taking place trigger the function removing a marker
           marker.remove()
           //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
-
         });
 }
-
-
-
 map.on('click', onMapClick);
 
 // Leaflet Search
