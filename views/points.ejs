@@ -85,7 +85,7 @@ function onMapClick(e) {// event handler
     <br>
     </form>`
 
-  var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
+    var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
     popup
         .setLatLng(e.latlng)
         .setContent(form)
@@ -96,7 +96,51 @@ map.on('click', onMapClick);
 // Leaflet Search
 L.Control.geocoder().addTo(map);
     </script>
-  </main>
+</main>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+      <th scope="col">Created by</th>
+      <th scope="col">Map ID</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Deleted at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const point of points) {%>
+    <tr>
+      <td><%=point.id%></td>
+      <td><%=point.title%></td>
+      <td><%=point.description%></td>
+      <td><img src="<%=point.image%>" alt="<%=point.title%> picture" style="width: 40px;"></td>
+      <td><%=point.created_by%></td>
+      <td><%=point.map_id%></td>
+      <td><%=point.created_at%></td>
+      <td><%=point.deleted_at%></td>
+      <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
+        <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
+      </form>
+    </tr>
+
+
+
+
+
+
+
+
+
+
+    <%}%>
+  </tbody>
+</table>
+
+
 
 
   <!-- Bootstrap JS -->
