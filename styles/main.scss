@@ -19,7 +19,7 @@ main {
   height: 50vh;
 }
 
-//Format for picture and title on See All Maps Page
+//Styling for picture and title on See All Maps Page
 
 img {
   height: 75%;
@@ -36,7 +36,7 @@ h3 {
   margin: 1em;
 }
 
-//Format for top navigation bar
+//Styling for top navigation bar
 
 .topnav {
   overflow: hidden;
@@ -75,7 +75,7 @@ h3 {
   }
 }
 
-//Format for responsive top navigation bar
+//Styling for responsive top navigation bar
 
 @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
@@ -91,16 +91,19 @@ h3 {
   }
 }
 
-//Format for list of all maps on the main page
+//Styling for list of all maps on the main page
 table.table {
   margin: 16px;
   min-width: 350px;
   width: 95vw;
 }
 
-//Format for form to create new map
+//Styling for form to create new map
 form {
   margin: 3vw 10vw 3vw 10vw;
 }
 
-
+//Styling for div containing the delete button on all maps list
+td form {
+  margin: 0px;
+}
