@@ -36,24 +36,34 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+
 const mapRoutes = require("./routes/maps");
-const pointsRoutes = require("./routes/points");
-const profileRoutes = require("./routes/profile");
+const pointRoutes = require("./routes/points");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
 app.use("/maps", mapRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/points", pointsRoutes(db));
-app.use("/", profileRoutes(db));
+app.use("/maps", pointRoutes(db));
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  db.query(`select maps.id, maps.title, maps.description from maps;`)
+  .then(data => {
+    const maps = data.rows;
+    console.log('this is maps: ', maps);
+    console.log('maps destructured: ', {maps});
+    res.render("index", { maps });
+  })
+  .catch(err => {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
 
 app.listen(PORT, () => {

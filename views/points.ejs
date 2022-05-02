@@ -30,35 +30,141 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
 
+   <!-- Leaflet Geocoder CSS -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
+   <!-- Leaflet Geocoder JS -->
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script>var points = <%- JSON.stringify(points); %>//creates points var inside java script from ejs
+  //https://stackoverflow.com/questions/11024840/ejs-versus
+  $(function() {//$ is document ready
+    for (let point of points) {
+      var marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
+      marker.bindPopup(`
+      <div><b>${point.title}</b><div>
+      <div style="padding-top: 10px; padding-bottom: 10px">${point.description}</div>
+      <div><img src="${point.image}" style="height: 60px; display: block;
+      margin-left: auto; margin-right: auto;"/></div>
+      `);//helper function from leaflet to bind a pop up to an event mouse click
+    }
+
+    //create an add to map functions
+    //it takes a point
+    //loop the points
+    //create a marker for each point
+    //add it to the map with .addTo(map)
+    console.log(points);//to see array with points in your browser console
+  });
+  </script>
 </head>
 
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
+  <main style="margin: 1em;">
+    <div id="map"></div>
+    <script>var map = L.map('map').setView([51.505, -0.09], 2.5);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 100,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    zoomSnap: 0.25,
+    accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
+}).addTo(map);
 
-  <form action="/" method="post">
-    <div class="form-group">
-      <label for="exampleInputLocation">Location</label>
-      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
-      <!--  -->
-    </div>
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Name for your map">
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" placeholder="Type description">
-    </div>
 
-    <div class="form-group">
-      <label for="image">Image URL</label>
-      <input type="url" class="form-control" id="image" placeholder="http://">
-    </div>
+//https://leafletjs.com/examples/zoom-levels/ info on zoom and map pic size
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+
+//var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
+//marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
+
+var popup = L.popup();//defining a var to connect to a leaflet library
+
+function onMapClick(e) {// event handler
+  const form =`<form method='POST' action='/maps/points'>
+    <label for='title'>Pin name:</label>
+    <br>
+    <input id='title' name='title' type='text'><br>
+    <label for='description'>Description:</label>
+    <br>
+    <input id='description' name='description' type='text'>
+    <br>
+    <label for='image'>Image URL:</label>
+    <br>
+    <input id='image' name='image' type='url' placeholder='http://'>
+    <br>
+    <input name='latitude' type='hidden' value='${e.latlng.lat}'>
+    <input name='longitude' type='hidden' value='${e.latlng.lng}'>
+    <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
+    <br>
+    </form>`
+
+
+  var marker = L.marker(e.latlng)
+  .addTo(map);//take an event data, create a marker
+
+    popup
+        .setLatLng(e.latlng)
+        .setContent(form)
+        .openOn(map)//pop up opens on the map after clicking
+        .on('remove', function() {//as event is taking place trigger the function removing a marker
+          marker.remove()
+          //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
+        });
+}
+map.on('click', onMapClick);
+
+// Leaflet Search
+L.Control.geocoder().addTo(map);
+    </script>
+</main>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+      <th scope="col">Created by</th>
+      <th scope="col">Map ID</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Deleted at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const point of points) {%>
+    <tr>
+      <td><%=point.id%></td>
+      <td><%=point.title%></td>
+      <td><%=point.description%></td>
+      <td><img src="<%=point.image%>" alt="<%=point.title%> picture" style="width: 40px;"></td>
+      <td><%=point.created_by%></td>
+      <td><%=point.map_id%></td>
+      <td><%=point.created_at%></td>
+      <td><%=point.deleted_at%></td>
+      <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
+        <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
+      </form>
+    </tr>
+
+
+
+
+
+
+
+
+
+
+    <%}%>
+  </tbody>
+</table>
+
+
 
 
   <!-- Bootstrap JS -->

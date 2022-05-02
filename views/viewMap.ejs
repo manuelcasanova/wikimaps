@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <!-- Topnavbar -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
@@ -23,39 +20,45 @@
   <title>Wiki Maps</title>
 
 
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+  integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+  crossorigin=""/>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
+
 
 </head>
 
-
+<!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
-  <main style="margin: 1em;">
-    <h3>Welcome message here</h3>
-  </main>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (const map of maps) {%>
-      <tr>
-        <td><%=map.id%></td>
-        <td><a href="/maps/<%= map.id%>"><%=map.title%></a></td>
-        <td><%=map.description%></td>
-        <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
-          <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
-        </form>
-      </tr>
-      <%}%>
-    </tbody>
 
-  </table>
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="exampleInputLocation">Location</label>
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" placeholder="Enter location">
+      <!--  -->
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name for your map">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" placeholder="Type description">
+    </div>
 
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input type="url" class="form-control" id="image" placeholder="http://">
+    </div>
 
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
 
   <!-- Bootstrap JS -->
