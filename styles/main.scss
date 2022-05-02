@@ -11,12 +11,8 @@ body {
 }
 
 header {
-  background-color: blue;
-}
+  margin-bottom: 10vh;
 
-main {
-  margin: 1em;
-  height: 50vh;
 }
 
 //Styling for picture and title on See All Maps Page
@@ -29,14 +25,42 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  //To avoid resizing of image
+  min-width: 400px;
+  max-width: 450px;
 }
 
-h3 {
+.mainTitle {
   text-align: center;
   margin: 1em;
+  font-size: x-large;
 }
 
-//Styling for top navigation bar
+.mainSubtitle {
+  text-align: center;
+  margin: 1em;
+  font-size: large;
+}
+
+//Styling for list of all maps on the main page
+table.table {
+  margin: 0px 16px 16px 16px;
+  min-width: 350px;
+  width: 95vw;
+}
+
+//Styling for form to create new map
+form {
+  margin: 3vw 10vw 3vw 10vw;
+}
+
+//Styling for div containing the delete button on all maps list
+td form {
+  margin: 0px;
+}
+
+
+//Styling for top navigation bar NOTHING ELSE BELOW
 
 .topnav {
   overflow: hidden;
@@ -89,21 +113,4 @@ h3 {
     display: block;
     text-align: left;
   }
-}
-
-//Styling for list of all maps on the main page
-table.table {
-  margin: 16px;
-  min-width: 350px;
-  width: 95vw;
-}
-
-//Styling for form to create new map
-form {
-  margin: 3vw 10vw 3vw 10vw;
-}
-
-//Styling for div containing the delete button on all maps list
-td form {
-  margin: 0px;
 }
