@@ -15,6 +15,7 @@ const addPin = function(db, pin) {
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
+//pin deleting
 const deletePin = function(db, id) {
   const queryParams = [id];
   let queryString = `DELETE FROM points WHERE id = $1 RETURNING *`;
@@ -37,7 +38,17 @@ module.exports = (db) => {
 
 
   router.get("/points", (req, res) => {//to get the points from db
-    db.query(`select points.id, points.title, points.description, points.image, points.created_by, points.map_id, points.created_at, points.created_by from points;`)
+
+    db.query(`select points.latitude,
+    points.longitude, points.id,
+    points.title,
+    points.description,
+    points.image,
+    points.created_by,
+    points.map_id,
+    points.created_at,
+    points.deleted_at from points;`)
+
     .then(data => {
       const points = data.rows;
       console.log("this is points: ", points)
