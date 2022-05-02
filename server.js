@@ -44,7 +44,7 @@ const pointRoutes = require("./routes/points");
 app.use("/users", usersRoutes(db));
 app.use("/maps", mapRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/maps/", pointRoutes(db));
+app.use("/maps", pointRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!

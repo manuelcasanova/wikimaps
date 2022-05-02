@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+  <!-- Topnavbar -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
@@ -18,6 +21,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <title>Wiki Maps</title>
+
+
 
 </head>
 
@@ -30,7 +35,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Preview</th>
+        <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
       </tr>
@@ -39,8 +44,11 @@
       <% for (const map of maps) {%>
       <tr>
         <td><%=map.id%></td>
-        <td><%=map.title%></td>
+        <td><a href="/maps/<%= map.id%>"><%=map.title%></a></td>
         <td><%=map.description%></td>
+        <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
+          <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
+        </form>
       </tr>
       <%}%>
     </tbody>

@@ -102,8 +102,10 @@ function onMapClick(e) {// event handler
     <br>
     </form>`
 
+
   var marker = L.marker(e.latlng)
   .addTo(map);//take an event data, create a marker
+
     popup
         .setLatLng(e.latlng)
         .setContent(form)
@@ -144,14 +146,22 @@ L.Control.geocoder().addTo(map);
       <td><%=point.map_id%></td>
       <td><%=point.created_at%></td>
       <td><%=point.deleted_at%></td>
-
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
       </form>
     </tr>
+
+
+
+
+
+
+
+
+
+
     <%}%>
   </tbody>
-
 </table>
 
 

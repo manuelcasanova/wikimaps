@@ -26,6 +26,13 @@ const addMap = function(db, map) {//adding map to db, so far without a user, use
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
+const deleteMAP = function(db, id) {
+  const queryParams = [id];
+  let queryString = `DELETE FROM maps WHERE id = $1 RETURNING *`;
+  console.log(queryParams, queryString);
+  return db.query(queryString, queryParams).then((res) => res.rows[0]);
+};
+
 module.exports = (db) => {//rendering a newmap page
   router.get("/new", (req, res) => {//app.use("/maps", mapRoutes(db)); from server file is a base, then we add /new
       res.render("new");
@@ -42,7 +49,11 @@ module.exports = (db) => {//rendering a newmap page
     })
   })
 
+  router.post("/new/:id/delete", (req, res) => {
+    deleteMAP(db, req.params.id).then(result => {
+     res.redirect("/") //Once a maps is removed it reloads the page
+   })
+  })
+
   return router;
 };
-
-
