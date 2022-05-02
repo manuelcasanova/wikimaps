@@ -26,7 +26,7 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT *
+      `SELECT maps.title AS map_title, maps.description AS map_description, maps.created_by AS map_owner, points.title AS point_title, points.description AS point_description, points.created_by AS point_owner
     FROM maps
     JOIN points ON maps.id = points.map_id
     WHERE maps.id = $1;`, [mapId]
