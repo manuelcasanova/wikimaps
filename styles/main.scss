@@ -12,14 +12,31 @@ body {
 
 header {
   background-color: blue;
-
 }
 
 main {
+  margin: 1em;
   height: 50vh;
 }
 
-//Format for top navigation bar
+//Styling for picture and title on See All Maps Page
+
+img {
+  height: 75%;
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+h3 {
+  text-align: center;
+  margin: 1em;
+}
+
+//Styling for top navigation bar
 
 .topnav {
   overflow: hidden;
@@ -58,7 +75,7 @@ main {
   }
 }
 
-//Format for responsive top navigation bar
+//Styling for responsive top navigation bar
 
 @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
@@ -74,16 +91,19 @@ main {
   }
 }
 
-//Format for list of all maps on the main page
+//Styling for list of all maps on the main page
 table.table {
   margin: 16px;
   min-width: 350px;
   width: 95vw;
 }
 
-//Format for form to create new map
+//Styling for form to create new map
 form {
   margin: 3vw 10vw 3vw 10vw;
 }
 
-
+//Styling for div containing the delete button on all maps list
+td form {
+  margin: 0px;
+}
