@@ -97,6 +97,8 @@
 var popup = L.popup();//defining a var to connect to a leaflet library
 
 function onMapClick(e) {// event handler
+  var mapId = "<%= mapId %>";
+  console.log(mapId);
   const form =`<form method='POST' action='/maps/points'>
     <label for='title'>Pin name:</label>
     <br>
@@ -111,6 +113,8 @@ function onMapClick(e) {// event handler
     <br>
     <input name='latitude' type='hidden' value='${e.latlng.lat}'>
     <input name='longitude' type='hidden' value='${e.latlng.lng}'>
+    <input name='mapId' type='hidden' value='${mapId}'>
+
     <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
     <br>
     </form>`
@@ -161,12 +165,14 @@ L.Control.geocoder().addTo(map);
       <td><%=point.deleted_at%></td>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
+        <input type="hidden" value="<%= mapId %>" name="mapId" />
+
+        <!-- find out from where I am getting the map id  -->
       </form>
     </tr>
     <%}%>
   </tbody>
 </table>
-
 
 
 
