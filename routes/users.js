@@ -9,11 +9,15 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+  router.get("/profile", (req, res) => {
+    // const userId = req.params.id;
+    db.query(
+      `SELECT users.name AS user_name, users.id AS user_id, maps.title AS map_title, maps.created_by AS map_owner FROM users
+      JOIN maps ON users.id = maps.created_by;`)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const userMaps = data.rows;
+        console.log(userMaps)
+        res.json({ userMaps });
       })
       .catch(err => {
         res
