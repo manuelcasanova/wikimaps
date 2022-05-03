@@ -44,8 +44,8 @@ module.exports = (db) => {//rendering a newmap page
   router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
     console.log("this is reqbody:", req.body)
     addMap(db, req.body).then(result => {
-      console.log(result)
-      res.redirect("points")
+      console.log({ result })
+      res.redirect(`/maps/${result.id}/points`)
     })
   })
 
@@ -54,6 +54,34 @@ module.exports = (db) => {//rendering a newmap page
      res.redirect("/") //Once a maps is removed it reloads the page
    })
   })
+
+  router.get("/:id/points", (req, res) => {//to get the points from db
+
+    db.query(`select points.latitude,
+    points.longitude, points.id,
+    points.title,
+    points.description,
+    points.image,
+    points.created_by,
+    points.map_id,
+    points.created_at,
+    points.deleted_at from points
+    where points.map_id=${req.params.id};`)
+
+    .then(data => {
+      const points = data.rows;
+      console.log("this is points: ", points)
+      // res.json({ maps });
+      res.render("points", { mapId: req.params.id, points });
+
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
   return router;
 };
