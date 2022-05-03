@@ -76,6 +76,9 @@
       <td><%=point.point_title%></td>
       <td><%=point.point_description%></td>
       <td><%=point.user_name%></td>
+      <td><form method="GET" action="/maps/<%= point.map_id %>/points">
+        <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Edit</button>
+      </form></td>
     </tr>
     <%}%>
 
