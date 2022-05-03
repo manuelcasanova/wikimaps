@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <!-- Topnavbar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
@@ -42,18 +45,18 @@
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
     <div id="map"></div>
+    <script>var map = L.map('map').setView([51.505, -0.09], 6);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
+    id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
-
 var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
-
 var popup = L.popup();//defining a var to connect to a leaflet library
-
 function onMapClick(e) {// event handler
   var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
     popup
@@ -61,26 +64,25 @@ function onMapClick(e) {// event handler
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
 }
-
 map.on('click', onMapClick);
 // Leaflet Search
 L.Control.geocoder().addTo(map);
     </script>
   </main>
-  <form action="/" method="post">
+  <form action="/maps/new" method="post">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Name for your map">
+      <input type="text" name="title" class="form-control" id="name" placeholder="Name for your map">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" placeholder="Type description">
+      <input type="text" name="description" class="form-control" id="description" placeholder="Type description">
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="image">Image URL</label>
-      <input type="url" class="form-control" id="image" placeholder="http://">
-    </div>
+      <input type="url" name="description" class="form-control" id="image" placeholder="http://">
+    </div> -->
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

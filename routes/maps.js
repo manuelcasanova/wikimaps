@@ -7,6 +7,24 @@ const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
+const addMap = function(db, map) {//adding map to db, so far without a user, used in a "post" below
+  const queryParams = [map.title, map.description, 1];
+  //we are passing 1 as a "created_by" for now, but we need to change to a dynamic user id later
+  let queryString = ` INSERT INTO maps (
+    title,
+    description,
+    created_by
+  ) VALUES ($1, $2, $3)
+  RETURNING *;`;
+  return db.query(queryString, queryParams).then((res) => res.rows[0]);
+};
+
+const deleteMAP = function(db, id) {
+  const queryParams = [id];
+  let queryString = `DELETE FROM maps WHERE id = $1 RETURNING *`;
+  console.log(queryParams, queryString);
+  return db.query(queryString, queryParams).then((res) => res.rows[0]);
+};
 
 module.exports = (db) => {
   //rendering a newmap page
@@ -34,9 +52,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  // redirects from map title
 
-  //
   router.post("/", (req, res) => {
     const addMap = function (map) {
       const queryParams = [map["title"], map["description"]];
@@ -45,5 +61,21 @@ module.exports = (db) => {
       return pool.query(queryString, queryParams).then((res) => res.rows);
     };
   });
+
+//saving a map
+  router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
+    console.log("this is reqbody:", req.body)
+    addMap(db, req.body).then(result => {
+      console.log(result)
+      res.redirect("points")
+    })
+  })
+
+  router.post("/new/:id/delete", (req, res) => {
+    deleteMAP(db, req.params.id).then(result => {
+     res.redirect("/") //Once a maps is removed it reloads the page
+   })
+  })
+
   return router;
 };
