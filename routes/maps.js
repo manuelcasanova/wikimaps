@@ -7,13 +7,6 @@ const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-// TEMPLATE FOR ROUTES
-// module.exports = (db) => {
-//   router.get("/", (req, res) => {
-
-//   });
-//   return router;
-// };
 
 module.exports = (db) => {
   //rendering a newmap page
@@ -26,15 +19,14 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, maps.created_by AS map_owner, points.title AS point_title, points.description AS point_description, points.created_by AS point_owner
+      `SELECT maps.title AS map_title, maps.description AS map_description, maps.created_by AS map_owner, points.title AS point_title, points.description AS point_description, points.created_by AS point_owner, users.name AS user_name
     FROM maps
     JOIN points ON maps.id = points.map_id
+    JOIN users ON users.id = points.created_by
     WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {
-
         const mapPoints = data.rows;
-        console.log('DESTRUCTURED: ', { mapPoints });
         res.render("viewMap", { mapPoints });
       })
       .catch((err) => {
