@@ -32,8 +32,10 @@ module.exports = (db) => {
   })
 
   router.post("/points/:id/delete", (req, res) => {
+    console.log("test", req.body.mapId)
     deletePin(db, req.params.id).then(result => {
-     res.redirect("/maps/points") //Once a pin is removed it reloads the page
+     //res.redirect("/maps/points") //Once a pin is removed it reloads the page
+     res.redirect(`/maps/${req.body.mapId}/points`)
    })
  })
 

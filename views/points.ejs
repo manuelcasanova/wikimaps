@@ -165,12 +165,14 @@ L.Control.geocoder().addTo(map);
       <td><%=point.deleted_at%></td>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
+        <input type="hidden" value="<%= mapId %>" name="mapId" />
+
+        <!-- find out from where I am getting the map id  -->
       </form>
     </tr>
     <%}%>
   </tbody>
 </table>
-
 
 
 
