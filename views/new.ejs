@@ -55,14 +55,20 @@
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
 var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+marker.bindPopup(`<div><b>Big Ben</b></div><br>
+<div>The Houses of Parliament's<br>iconic clock tower.</div>`)
+.openPopup();
 var popup = L.popup();//defining a var to connect to a leaflet library
 function onMapClick(e) {// event handler
   var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker
     popup
         .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
+        .setContent("Geo coordinates of your pin are: " + e.latlng.toString())
+        .openOn(map)
+        .on('remove', function() {//as event is taking place trigger the function removing a marker
+          marker.remove()
+          //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
+        });
 }
 map.on('click', onMapClick);
 // Leaflet Search
