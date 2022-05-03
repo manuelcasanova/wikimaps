@@ -38,13 +38,16 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 
 const mapRoutes = require("./routes/maps");
-const pointRoutes = require("./routes/points");
+const pointsRoutes = require("./routes/points");
+const profileRoutes = require("./routes/profile");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/maps", mapRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/maps", pointRoutes(db));
+app.use("/points", pointsRoutes(db));
+app.use("/", profileRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -54,8 +57,6 @@ app.get("/", (req, res) => {
   db.query(`select maps.id, maps.title, maps.description from maps;`)
   .then(data => {
     const maps = data.rows;
-    console.log('this is maps: ', maps);
-    console.log('maps destructured: ', {maps});
     res.render("index", { maps });
   })
   .catch(err => {

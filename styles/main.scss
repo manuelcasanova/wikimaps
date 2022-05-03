@@ -4,6 +4,11 @@ body {
 
 }
 
+main {
+  height: 50vh;
+}
+
+
 #map {
   height: 100%;
   margin-right: 3vw;
@@ -11,15 +16,56 @@ body {
 }
 
 header {
-  background-color: blue;
+  margin-bottom: 10vh;
 
 }
 
-main {
-  height: 50vh;
+//Styling for picture and title on See All Maps Page
+
+header img {
+  height: 75%;
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  //To avoid resizing of image
+  min-width: 400px;
+  max-width: 450px;
 }
 
-//Format for top navigation bar
+.mainTitle {
+  text-align: center;
+  margin: 1em;
+  font-size: x-large;
+}
+
+.mainSubtitle {
+  text-align: center;
+  margin: 1em;
+  font-size: large;
+}
+
+//Styling for list of all maps on the main page
+table.table {
+  margin: 0px 16px 16px 16px;
+  min-width: 350px;
+  width: 95vw;
+}
+
+//Styling for form to create new map
+form {
+  margin: 3vw 10vw 3vw 10vw;
+}
+
+//Styling for div containing the delete button on all maps list
+td form {
+  margin: 0px;
+}
+
+
+//Styling for top navigation bar NOTHING ELSE BELOW
 
 .topnav {
   overflow: hidden;
@@ -58,7 +104,7 @@ main {
   }
 }
 
-//Format for responsive top navigation bar
+//Styling for responsive top navigation bar
 
 @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
@@ -73,17 +119,3 @@ main {
     text-align: left;
   }
 }
-
-//Format for list of all maps on the main page
-table.table {
-  margin: 16px;
-  min-width: 350px;
-  width: 95vw;
-}
-
-//Format for form to create new map
-form {
-  margin: 3vw 10vw 3vw 10vw;
-}
-
-
