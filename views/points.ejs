@@ -99,7 +99,8 @@ var popup = L.popup();//defining a var to connect to a leaflet library
 function onMapClick(e) {// event handler
   var mapId = "<%= mapId %>";
   console.log(mapId);
-  const form =`<form method='POST' action='/maps/points'>
+  const form =`<div>
+    <form method='POST' action='/maps/points'>
     <label for='title'>Pin name:</label>
     <br>
     <input id='title' name='title' type='text'><br>
@@ -117,7 +118,8 @@ function onMapClick(e) {// event handler
 
     <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
     <br>
-    </form>`
+    </form>
+    </div>`
 
 
   var marker = L.marker(e.latlng)
