@@ -20,10 +20,13 @@
   <%if (!userid) {%>
   <a href="/users/login">Login</a>
   <a href="/">Sign Up</a>
+
   <%} else {%>
+
   <form method="POST" action="/users/logout">
-    <button>Logout</button>
+    <button type="submit">Logout</button>
   </form>
+
     <%}%>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
