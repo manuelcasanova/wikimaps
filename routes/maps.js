@@ -35,10 +35,12 @@ const deleteMAP = function(db, id) {
 
 module.exports = (db) => {//rendering a newmap page
   router.get("/new", (req, res) => {//app.use("/maps", mapRoutes(db)); from server file is a base, then we add /new
-      res.render("new");
+    const userid = req.session.userid;
+    res.render('new', {userid})
   });
   router.get("/viewMap", (req, res) => {
-    res.render("viewMap");
+    const userid = req.session.userid;
+    res.render('viewMap', {userid})
   });
 //saving a map
   router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
@@ -70,9 +72,10 @@ module.exports = (db) => {//rendering a newmap page
 
     .then(data => {
       const points = data.rows;
+      const userid = req.session.userid;
       console.log("this is points: ", points)
       // res.json({ maps });
-      res.render("points", { mapId: req.params.id, points });
+      res.render("points", { mapId: req.params.id, points, userid } );
 
     })
     .catch(err => {
@@ -94,7 +97,8 @@ module.exports = (db) => {//rendering a newmap page
     )
       .then((data) => {
         const mapPoints = data.rows;
-        res.render("viewMap", { mapPoints });
+        const userid = req.session.userid;
+        res.render("viewMap", { mapPoints, userid });
       })
       .catch((err) => {
         console.log(err);

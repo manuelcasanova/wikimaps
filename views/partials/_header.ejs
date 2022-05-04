@@ -1,4 +1,7 @@
-<script>
+<!-- CHANGED WITH IAN top nav bar BELOW: WITHOUT COOKIES -->
+
+
+ <script>
   function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -14,10 +17,37 @@
   <a href="/" class="active">WIKI MAPS</a>
   <a href="/">See All Maps</a>
   <a href="/maps/new">Create a New Map</a>
-  <a href="/">Login</a>
+  <%if (!userid) {%>
+  <a href="/users/login">Login</a>
   <a href="/">Sign Up</a>
+  <%}%>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
 </div>
+
+<!-- ORIGINAL top nav bar BELOW: WITHOUT COOKIES -->
+
+<!-- <script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+
+
+<div class="topnav" id="myTopnav">
+  <a href="/" class="active">WIKI MAPS</a>
+  <a href="/">See All Maps</a>
+  <a href="/maps/new">Create a New Map</a>
+  <a href="/users/login">Login</a>
+  <a href="/">Sign Up</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div> -->
 
