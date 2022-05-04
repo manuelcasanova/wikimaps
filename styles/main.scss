@@ -58,14 +58,38 @@ table.table {
 //Styling for div containing the delete button on all maps list
 td form {
   margin: 0px;
+
+
+//Format for form to create new map
+.map-form {
+  margin: 3vw 10vw 3vw 10vw;
+}
+
+//create a pin form
+.pin-form {
+  width: auto;
+  display: flex;
+  justify-content: center;
+
+}
+
+.demo-image {
+  img {
+    width: 40px;
+    margin-top: 5px;
+  }
+  display: flex;
+  justify-content: center;
+}
 }
 //Styling for top navigation bar NOTHING ELSE BELOW
-.topnav {
+.topnav, .topnav button {
   overflow: hidden;
   background-color: #333;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  border: none;
 }
 .topnav a, .topnav button {
   float: left;
@@ -110,26 +134,5 @@ td form {
   }
 }
 
-//Format for form to create new map
-.map-form {
-  margin: 3vw 10vw 3vw 10vw;
-}
-
-//create a pin form
-.pin-form {
-  width: auto;
-  display: flex;
-  justify-content: center;
-
-}
-
-.demo-image {
-  img {
-    width: 40px;
-    margin-top: 5px;
-  }
-  display: flex;
-  justify-content: center;
-}
 
 
