@@ -82,8 +82,24 @@ table.table {
 }
 
 //Format for form to create new map
-form {
+.map-form {
   margin: 3vw 10vw 3vw 10vw;
 }
 
+//create a pin form
+.pin-form {
+  width: auto;
+  display: flex;
+  justify-content: center;
+
+}
+
+.demo-image {
+  img {
+    width: 40px;
+    margin-top: 5px;
+  }
+  display: flex;
+  justify-content: center;
+}
 
