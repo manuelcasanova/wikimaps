@@ -26,6 +26,8 @@ const deletePin = function(db, id) {
 module.exports = (db) => {
   router.post("/points", (req, res) => {//post method to save points to the data base, the next step is to write the function(step2)
     addPin(db, req.body).then(result => {
+      //req.body Contains key-value pairs of data submitted in the request body. By default, it is undefined,
+      //and is populated when you use body-parsing middleware such as body-parser
       console.log(result)
       res.redirect(`/maps/${req.body.mapId}/points`) //Once a pin is added it reloads the page and shows the pin at the bottom
     })
@@ -34,7 +36,9 @@ module.exports = (db) => {
   router.post("/points/:id/delete", (req, res) => {
     console.log("test", req.body.mapId)
     deletePin(db, req.params.id).then(result => {
-     //res.redirect("/maps/points") //Once a pin is removed it reloads the page
+      //req.params.id is for the route parameters, not the form data.
+      //it is an object containing properties mapped to the named route “parameters”. For example,
+      //if you have the route /user/:name, then the “name” property is available as req.params.name.
      res.redirect(`/maps/${req.body.mapId}/points`)
    })
  })
