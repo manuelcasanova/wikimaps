@@ -10,6 +10,10 @@
       x.className = "topnav";
     }
   }
+
+  function alertSignup() {
+  alert("In production, add SIGN UP routes");
+}
   </script>
 
 
@@ -19,7 +23,7 @@
   <a href="/maps/new">Create a New Map</a>
   <%if (!userid) {%>
   <a href="/users/login">Login</a>
-  <a href="/">Sign Up</a>
+  <button onclick="alertSignup()">Sign Up</button>
 
   <%} else {%>
 
