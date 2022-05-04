@@ -53,7 +53,7 @@
       <% for (const map of maps) {%>
       <tr>
         <td><%=map.id%></td>
-        <td><a href="/maps/<%= map.id%>"><%=map.title%></a></td>
+        <td><a href="/maps/<%= map.id%>"> <%=map.title%></a></td>
         <td><%=map.description%></td>
         <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
           <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
