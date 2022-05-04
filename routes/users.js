@@ -35,6 +35,11 @@ module.exports = (db) => {
     res.redirect(`/`);
   });
 
+  router.post("/logout", (req, res) => {
+    req.session = null; //To destroy a session instead of `cookie parser res.clearCookie("userID");`
+    res.redirect('/');
+  });
+
   return router;
 };
 
