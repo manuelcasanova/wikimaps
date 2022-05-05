@@ -74,7 +74,7 @@
 <body>
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
-    <div class="onemaptitle">
+    <div class="maptitle">
 
       <h2 id="map_title"><%= points[0].map_title %></h2>
 
@@ -174,17 +174,20 @@ L.Control.geocoder().addTo(map);
       <td><%=point.id%></td>
       <td><%=point.title%></td>
       <td><%=point.description%></td>
-      <td><img src="<%=point.image%>" alt="<%=point.title%> picture" style="width: 40px;"></td>
+      <td><img src="<%=point.image%>" style="width: 40px;"></td>
       <td><%=point.created_by%></td>
       <td><%=point.map_id%></td>
       <td><%=point.created_at%></td>
       <td><%=point.deleted_at%></td>
+
+      <% if (point.id) {%>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
         <input type="hidden" value="<%= mapId %>" name="mapId" />
 
         <!-- find out from where I am getting the map id  -->
       </form>
+      <%}%>
     </tr>
     <%}%>
   </tbody>
