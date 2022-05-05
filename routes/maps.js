@@ -89,9 +89,10 @@ module.exports = (db) => {//rendering a newmap page
    router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.id AS point_id
+      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.id AS point_id, users.id AS user_id
     FROM maps
     LEFT JOIN points ON maps.id = points.map_id
+    LEFT JOIN users ON users.id = maps.created_by
     WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {
