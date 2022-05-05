@@ -1,5 +1,5 @@
 <script>
-  function myFunction() {
+  function hamburgerMenu() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
       x.className += " responsive";
@@ -24,7 +24,7 @@
     <a href="/users/login">Create a New Map</a>
     <%} else {%>
       <a href="/maps/new">Create a New Map</a>
-      <a href="/profile">Logged in as user.name</a>
+      <a href="/profile/<%= userid %>">Logged in as <%= userid %></a>
       <%}%>
 
   <%if (!userid) {%>
@@ -38,7 +38,7 @@
   </form>
 
     <%}%>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu()">
     <i class="fa fa-bars"></i>
   </a>
 </div>
