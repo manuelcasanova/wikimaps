@@ -1,7 +1,4 @@
-<!-- CHANGED WITH IAN top nav bar BELOW: WITHOUT COOKIES -->
-
-
- <script>
+<script>
   function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -27,7 +24,9 @@
     <a href="/users/login">Create a New Map</a>
     <%} else {%>
       <a href="/maps/new">Create a New Map</a>
+      <a href="/profile">Logged in as user.name</a>
       <%}%>
+
   <%if (!userid) {%>
   <a href="/users/login">Login</a>
   <button onclick="alertSignup()">Sign Up</button>
@@ -43,29 +42,3 @@
     <i class="fa fa-bars"></i>
   </a>
 </div>
-
-<!-- ORIGINAL top nav bar BELOW: WITHOUT COOKIES -->
-
-<!-- <script>
-  function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
-    }
-  }
-  </script>
-
-
-<div class="topnav" id="myTopnav">
-  <a href="/" class="active">WIKI MAPS</a>
-  <a href="/">See All Maps</a>
-  <a href="/maps/new">Create a New Map</a>
-  <a href="/users/login">Login</a>
-  <a href="/">Sign Up</a>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-  </a>
-</div> -->
-
