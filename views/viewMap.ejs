@@ -59,7 +59,7 @@
 
     <div id="map"></div>
     <script>
-    var map = L.map('map').setView([51.505, -0.09], 3);
+    var map = L.map('map').setView([50.527397, -31.857156], 2);
 
     map.on('popupclose', function (popup) {
       map.setZoom(2.5);
@@ -89,11 +89,13 @@ var points = <%- JSON.stringify(mapPoints); %>//creates points var inside java s
       marker.bindPopup(`
       <div><b>${point.point_title}</b></div>
       <div style="padding-top: 10px; padding-bottom: 10px">${point.point_description}</div>
-      <div><img src="${point.image}" style="height: 60px; display: block;
+      <div><img src="${point.point_image}" style="height: 60px; display: block;
       margin-left: auto; margin-right: auto;"/></div>
       `);//helper function from leaflet to bind a pop up to an event mouse click
     }
   });
+
+
 
 //step 1 added a dummy marker with a pop up
 // var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
@@ -102,41 +104,41 @@ var points = <%- JSON.stringify(mapPoints); %>//creates points var inside java s
 
 var popup = L.popup();//defining a var to connect to a leaflet library
 
-function onMapClick(e) {// event handler
-  var mapId = "<%= mapId %>";
-  console.log(mapId);
-  const form =`<div>
-    <form method='POST' action='/maps/points'>
-    <label for='title'>Pin name:</label>
-    <br>
-    <input id='title' name='title' type='text'><br>
-    <label for='description'>Description:</label>
-    <br>
-    <input id='description' name='description' type='text'>
-    <br>
-    <label for='image'>Image URL:</label>
-    <br>
-    <input id='image' name='image' type='url' placeholder='http://'>
-    <br>
-    <input name='latitude' type='hidden' value='${e.latlng.lat}'>
-    <input name='longitude' type='hidden' value='${e.latlng.lng}'>
-    <input name='mapId' type='hidden' value='${mapId}'>
-    <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
-    <br>
-    </form>
-    </div>`
-    var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker on a specific geo
-    popup
-        .setLatLng(e.latlng)
-        .setContent(form)
-        .openOn(map)//pop up opens on the map after clicking
-        .on('remove', function() {//as event is taking place trigger the function removing a marker
-          marker.remove()
-          //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
-        });
-}
+// function onMapClick(e) {// event handler
+//   var mapId = "<%= mapId %>";
+//   console.log(mapId);
+//   const form =`<div>
+//     <form method='POST' action='/maps/points'>
+//     <label for='title'>Pin name:</label>
+//     <br>
+//     <input id='title' name='title' type='text'><br>
+//     <label for='description'>Description:</label>
+//     <br>
+//     <input id='description' name='description' type='text'>
+//     <br>
+//     <label for='image'>Image URL:</label>
+//     <br>
+//     <input id='image' name='image' type='url' placeholder='http://'>
+//     <br>
+//     <input name='latitude' type='hidden' value='${e.latlng.lat}'>
+//     <input name='longitude' type='hidden' value='${e.latlng.lng}'>
+//     <input name='mapId' type='hidden' value='${mapId}'>
+//     <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
+//     <br>
+//     </form>
+//     </div>`
+//     var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker on a specific geo
+//     popup
+//         .setLatLng(e.latlng)
+//         .setContent(form)
+//         .openOn(map)//pop up opens on the map after clicking
+//         .on('remove', function() {//as event is taking place trigger the function removing a marker
+//           marker.remove()
+//           //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
+//         });
+// }
 
-map.on('click', onMapClick);
+//map.on('click', onMapClick);
 
 
 //searchbar function
