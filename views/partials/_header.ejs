@@ -14,13 +14,20 @@
   function alertSignup() {
   alert("In production, add SIGN UP routes");
 }
+
+
+
   </script>
 
 
 <div class="topnav" id="myTopnav">
   <a href="/" class="active">WIKI MAPS</a>
   <a href="/">See All Maps</a>
-  <a href="/maps/new">Create a New Map</a>
+  <%if (!userid) {%>
+    <a href="/users/login">Create a New Map</a>
+    <%} else {%>
+      <a href="/maps/new">Create a New Map</a>
+      <%}%>
   <%if (!userid) {%>
   <a href="/users/login">Login</a>
   <button onclick="alertSignup()">Sign Up</button>
