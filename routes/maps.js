@@ -87,14 +87,15 @@ module.exports = (db) => {//rendering a newmap page
    router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id
+      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.latitude, points.longitude, points.image AS point_image
     FROM maps
     JOIN points ON maps.id = points.map_id
     WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {
         const mapPoints = data.rows;
-        res.render("viewMap", { mapPoints });
+        console.log(mapPoints)
+        res.render("viewMap", { mapPoints, mapId });
       })
       .catch((err) => {
         console.log(err);

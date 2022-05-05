@@ -33,6 +33,15 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
 
+<!-- Leaflet Geocoder CSS for searchbar-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+<!-- Leaflet Geocoder JS for searchbar-->
+     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+
+
 
 </head>
 
@@ -44,14 +53,19 @@
 
     <div class="onemaptitle">
 
-        <h2 id="map_title"><%= mapPoints.length > 0 ? mapPoints[0].map_title  : "Please create a pin"%></h2>
+        <h2 id="map_title"><%= mapPoints.length > 0 ? mapPoints[0].map_title  : "You have no pins added. Click on the map to select a location." %></h2>
 
       </div>
 
-
-
     <div id="map"></div>
-    <script>var map = L.map('map').setView([51.505, -0.09], 6);
+    <script>
+    var map = L.map('map').setView([51.505, -0.09], 3);
+
+    map.on('popupclose', function (popup) {
+      map.setZoom(2.5);
+    });
+
+
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -60,6 +74,73 @@
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZGFrYXJhYSIsImEiOiJjbDJnazRxdHIwNG01M2xrMWdlZXcxenV2In0.oMDEKtURRjgTZ_vqRuPWOQ'
 }).addTo(map);
+
+
+var points = <%- JSON.stringify(mapPoints); %>//creates points var inside java script from ejs
+  //https://stackoverflow.com/questions/11024840/ejs-versus
+  console.log(points)
+  $(function() {//$ is document ready
+    for (let point of points) {
+      const marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
+      console.log(marker)
+      marker.on('click', () =>  {
+        map.setView([point.latitude, point.longitude], 5)
+      });
+      marker.bindPopup(`
+      <div><b>${point.point_title}</b></div>
+      <div style="padding-top: 10px; padding-bottom: 10px">${point.point_description}</div>
+      <div><img src="${point.image}" style="height: 60px; display: block;
+      margin-left: auto; margin-right: auto;"/></div>
+      `);//helper function from leaflet to bind a pop up to an event mouse click
+    }
+  });
+
+//step 1 added a dummy marker with a pop up
+// var marker = L.marker([51.5, -0.09]).addTo(map);//making a new marker with Leaflet library
+// marker.bindPopup("I am a popup. a place for info fetched from the database").openPopup();
+
+
+var popup = L.popup();//defining a var to connect to a leaflet library
+
+function onMapClick(e) {// event handler
+  var mapId = "<%= mapId %>";
+  console.log(mapId);
+  const form =`<div>
+    <form method='POST' action='/maps/points'>
+    <label for='title'>Pin name:</label>
+    <br>
+    <input id='title' name='title' type='text'><br>
+    <label for='description'>Description:</label>
+    <br>
+    <input id='description' name='description' type='text'>
+    <br>
+    <label for='image'>Image URL:</label>
+    <br>
+    <input id='image' name='image' type='url' placeholder='http://'>
+    <br>
+    <input name='latitude' type='hidden' value='${e.latlng.lat}'>
+    <input name='longitude' type='hidden' value='${e.latlng.lng}'>
+    <input name='mapId' type='hidden' value='${mapId}'>
+    <input class='btn btn-outline-success btn-sm' style ='margin-top: 20px;' type='submit' value='Create a pin'>
+    <br>
+    </form>
+    </div>`
+    var marker = L.marker(e.latlng).addTo(map);//take an event data, create a marker on a specific geo
+    popup
+        .setLatLng(e.latlng)
+        .setContent(form)
+        .openOn(map)//pop up opens on the map after clicking
+        .on('remove', function() {//as event is taking place trigger the function removing a marker
+          marker.remove()
+          //https://stackoverflow.com/questions/26058896/leaflet-popups-setting-an-on-close-event
+        });
+}
+
+map.on('click', onMapClick);
+
+
+//searchbar function
+L.Control.geocoder().addTo(map);
 </script>
 
 <table class="table">
