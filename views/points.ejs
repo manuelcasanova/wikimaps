@@ -182,7 +182,7 @@ L.Control.geocoder().addTo(map);
       <td><%=point.created_at%></td>
       <td><%=point.deleted_at%></td>
 
-      <% if (point.id && userid) {%>
+      <% if (point.created_by == userid) {%>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
         <input type="hidden" value="<%= mapId %>" name="mapId" />
