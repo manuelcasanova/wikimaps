@@ -42,9 +42,10 @@
 
   <main style="margin: 1em;">
 
-    <div class="onemaptitle">
+    <div class="maptitle">
 
         <h2 id="map_title"><%= mapPoints[0].map_title %></h2>
+        <p> <a href="/maps/<%= mapPoints[0].map_id %>/points"> Create New Points</a> </p>
 
       </div>
 
@@ -76,9 +77,11 @@
       <td><%=point.point_title%></td>
       <td><%=point.point_description%></td>
       <td><%=point.user_name%></td>
+      <% if (point.point_id) {%>}
       <td><form method="GET" action="/maps/<%= point.map_id %>/points">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Edit</button>
       </form></td>
+      <%}%>
     </tr>
     <%}%>
 
