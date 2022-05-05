@@ -44,17 +44,19 @@ module.exports = (db) => {//rendering a newmap page
     res.render('viewMap', {userid})
   });
 //saving a map
-  router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
+  router.post("/new", (req, res) => {//post method to save maps to db, using a function writen above
     console.log("this is reqbody:", req.body)
     const userid = req.session.userid;
     if (!userid) {
       // reject add map
-      return;
+      res.redirect(`/users/login`)
+    } else {
+      addMap(db, req.body, userid).then(result => {
+        console.log({ result })
+        res.redirect(`/maps/${result.id}/points`)
+      })
     }
-    addMap(db, req.body, userid).then(result => {
-      console.log({ result })
-      res.redirect(`/maps/${result.id}/points`)
-    })
+
   })
 
   router.post("/new/:id/delete", (req, res) => {
@@ -73,8 +75,10 @@ module.exports = (db) => {//rendering a newmap page
     points.created_by,
     points.map_id,
     points.created_at,
-    points.deleted_at
+    points.deleted_at,
+    users.name AS user_name
     FROM maps
+    LEFT JOIN users ON users.id = maps.created_by
     LEFT JOIN points ON maps.id = points.map_id
     WHERE maps.id=${req.params.id};`)
 
@@ -105,7 +109,8 @@ module.exports = (db) => {//rendering a newmap page
       points.description AS point_description,
       maps.id AS map_id, points.latitude,
       points.longitude,
-      points.image AS point_image
+      points.image AS point_image,
+      users.name AS point_createdby
     FROM maps
     LEFT JOIN points ON maps.id = points.map_id
     LEFT JOIN users ON users.id = maps.created_by
