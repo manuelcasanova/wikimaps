@@ -2,16 +2,17 @@ const express = require('express');
 const router  = express.Router();
 
 //step2
-const addPin = function(db, pin) {
-  const queryParams = [pin.title, pin.description, pin.image, pin.latitude, pin.longitude, pin.mapId];
+const addPin = function(db, pin, userid) {
+  const queryParams = [pin.title, pin.description, pin.image, pin.latitude, pin.longitude, pin.mapId, userid];
   let queryString = ` INSERT INTO points (
     title,
     description,
     image,
     latitude,
     longitude,
-    map_id
-  ) VALUES ($1, $2, $3, $4, $5, $6)
+    map_id,
+    created_by
+  ) VALUES ($1, $2, $3, $4, $5, $6, $7)
   RETURNING *;`;
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
@@ -25,7 +26,8 @@ const deletePin = function(db, id) {
 
 module.exports = (db) => {
   router.post("/points", (req, res) => {//post method to save points to the data base, the next step is to write the function(step2)
-    addPin(db, req.body).then(result => {
+    const userid = req.session.userid;
+    addPin(db, req.body, userid).then(result => {
       console.log(result)
       res.redirect(`/maps/${req.body.mapId}/points`) //Once a pin is added it reloads the page and shows the pin at the bottom
     })
