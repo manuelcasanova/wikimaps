@@ -13,9 +13,11 @@ main {
 }
 
 #map {
-  height: 100%;
-  margin-right: 3vw;
+  height: 90%;
+  margin-right: 5vw;
+  margin-left: 5vw;
 }
+
 header {
   margin-bottom: 10vh;
 }
@@ -51,6 +53,8 @@ table.table {
   min-width: 350px;
   width: 95vw;
 }
+
+
 //Styling for form to create new map
 .map-form {
   margin: 3vw 10vw 3vw 10vw;

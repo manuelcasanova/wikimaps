@@ -155,15 +155,19 @@ L.Control.geocoder().addTo(map);
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">User</th>
+      <th scope="col">Image</th>
+      <th scope="col">Added by</th>
     </tr>
   </thead>
   <tbody>
+    <!--Related to maps.js const mapPoints-->
     <% for (const point of mapPoints) {%>
     <tr>
       <td><%=point.point_title%></td>
       <td><%=point.point_description%></td>
-      <td><%=point.user_name%></td>
+      <td><img src="<%=point.point_image%>" style="width: 40px;"></td>
+      <!--Need to fix this. It does not show the name of the proper creator of the pin -->
+      <td>check code on viewMap.ejs for of loop</td>
     </tr>
     <%}%>
 
