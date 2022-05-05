@@ -44,17 +44,19 @@ module.exports = (db) => {//rendering a newmap page
     res.render('viewMap', {userid})
   });
 //saving a map
-  router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
+  router.post("/new", (req, res) => {//post method to save maps to db, using a function writen above
     console.log("this is reqbody:", req.body)
     const userid = req.session.userid;
     if (!userid) {
       // reject add map
-      return;
+      res.redirect(`/users/login`)
+    } else {
+      addMap(db, req.body, userid).then(result => {
+        console.log({ result })
+        res.redirect(`/maps/${result.id}/points`)
+      })
     }
-    addMap(db, req.body, userid).then(result => {
-      console.log({ result })
-      res.redirect(`/maps/${result.id}/points`)
-    })
+
   })
 
   router.post("/new/:id/delete", (req, res) => {
