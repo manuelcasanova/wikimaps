@@ -45,7 +45,8 @@
     <div class="maptitle">
 
         <h2 id="map_title"><%= mapPoints[0].map_title %></h2>
-        <% if (mapPoints.user_id) {%>
+        <!-- Only want logged in users to be able to edit/create points on maps -->
+        <% if (userid) {%>
         <p> <a href="/maps/<%= mapPoints[0].map_id %>/points"> Create/Edit Points</a> </p>
         <%}%>
       </div>
