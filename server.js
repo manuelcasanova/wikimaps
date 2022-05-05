@@ -14,6 +14,15 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
+
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ["test"],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -51,12 +60,18 @@ app.use("/maps", pointRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  db.query(`select maps.id, maps.title, maps.description from maps;`)
+  db.query(`SELECT
+  users.id AS user_id,
+  maps.id,
+  maps.title,
+  maps.description
+  FROM maps
+  LEFT JOIN users on users.id = maps.created_by
+  ;`)
   .then(data => {
     const maps = data.rows;
-    console.log('this is maps: ', maps);
-    console.log('maps destructured: ', {maps});
-    res.render("index", { maps });
+    const userid = req.session.userid;
+    res.render("index", { maps, userid });
   })
   .catch(err => {
     console.log(err);

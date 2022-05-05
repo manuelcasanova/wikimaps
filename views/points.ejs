@@ -74,12 +74,19 @@
 <body>
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
+    <div class="maptitle">
+
+      <h2 id="map_title"><%= points[0].map_title %></h2>
+
+    </div>
     <div id="map"></div>
     <script>
       //setting starting point for when points are defined (we will use the very first point coordinates)
       // and for when the points do not exist in a given map
-      let starting = points.length > 0 ? [points[0].latitude, points[0].longitude] : [43.64249365536619, -79.38716085857133]
-      var map = L.map('map').setView(starting, 2.5);
+      // let starting = points.length > 0 ? [points[0].latitude, points[0].longitude] : [43.64249365536619, -79.38716085857133]
+      // var map = L.map('map').setView(starting, 2.5);
+
+      var map = L.map('map').setView([50.527397, -31.857156], 2);
     // map.on('popupopen', function (popup) {
     //   map.setZoom(5);
     // });
@@ -169,17 +176,20 @@ L.Control.geocoder().addTo(map);
       <td><%=point.id%></td>
       <td><%=point.title%></td>
       <td><%=point.description%></td>
-      <td><img src="<%=point.image%>" alt="<%=point.title%> picture" style="width: 40px;"></td>
+      <td><img src="<%=point.image%>" style="width: 40px;"></td>
       <td><%=point.created_by%></td>
       <td><%=point.map_id%></td>
       <td><%=point.created_at%></td>
       <td><%=point.deleted_at%></td>
+
+      <% if (point.id && userid) {%>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
         <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
         <input type="hidden" value="<%= mapId %>" name="mapId" />
 
         <!-- find out from where I am getting the map id  -->
       </form>
+      <%}%>
     </tr>
     <%}%>
   </tbody>

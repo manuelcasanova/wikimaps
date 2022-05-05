@@ -35,10 +35,12 @@ const deleteMAP = function(db, id) {
 
 module.exports = (db) => {//rendering a newmap page
   router.get("/new", (req, res) => {//app.use("/maps", mapRoutes(db)); from server file is a base, then we add /new
-      res.render("new");
+    const userid = req.session.userid;
+    res.render('new', {userid})
   });
   router.get("/viewMap", (req, res) => {
-    res.render("viewMap");
+    const userid = req.session.userid;
+    res.render('viewMap', {userid})
   });
 //saving a map
   router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
@@ -55,9 +57,9 @@ module.exports = (db) => {//rendering a newmap page
    })
   })
 
-  router.get("/:id/points", (req, res) => {//to get the points from db
-
-    db.query(`select points.latitude,
+    //to get the points from db, LEFT JOIN allows join table while points row is NULL
+  router.get("/:id/points", (req, res) => {
+    db.query(`SELECT maps.title AS map_title, points.latitude,
     points.longitude, points.id,
     points.title,
     points.description,
@@ -65,14 +67,17 @@ module.exports = (db) => {//rendering a newmap page
     points.created_by,
     points.map_id,
     points.created_at,
-    points.deleted_at from points
-    where points.map_id=${req.params.id};`)
+    points.deleted_at
+    FROM maps
+    LEFT JOIN points ON maps.id = points.map_id
+    WHERE maps.id=${req.params.id};`)
 
     .then(data => {
       const points = data.rows;
+      const userid = req.session.userid;
       console.log("this is points: ", points)
       // res.json({ maps });
-      res.render("points", { mapId: req.params.id, points });
+      res.render("points", { mapId: req.params.id, points, userid } );
 
     })
     .catch(err => {
@@ -87,15 +92,28 @@ module.exports = (db) => {//rendering a newmap page
    router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.latitude, points.longitude, points.image AS point_image
+
+      `SELECT maps.title AS map_title, 
+      maps.description AS map_description, 
+      points.title AS point_title, 
+      points.description AS point_description, 
+      maps.id AS map_id, points.latitude, 
+      points.longitude, 
+      points.image AS point_image
     FROM maps
-    JOIN points ON maps.id = points.map_id
+    LEFT JOIN points ON maps.id = points.map_id
+    LEFT JOIN users ON users.id = maps.created_by
     WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {
         const mapPoints = data.rows;
-        console.log(mapPoints)
-        res.render("viewMap", { mapPoints, mapId });
+
+        const userid = req.session.userid;
+        res.render("viewMap", { mapPoints, userid, mapId });
+      
+//         console.log(mapPoints)
+//         res.render("viewMap", { mapPoints, mapId });
+
       })
       .catch((err) => {
         console.log(err);

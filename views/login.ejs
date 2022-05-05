@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Login</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -26,46 +26,27 @@
 
 </head>
 
-<%- include('partials/_header') %>
 
-  <header>
+  <%- include('partials/_header') %>
 
-    <div class="mainTitle">Welcome to Wiki Maps</div>
+  <main style="margin: 1em;">
+    <h3>Sign in</h3>
 
-    <img class="mainpageimage" src="https://img.freepik.com/free-photo/top-view-white-toy-plane-map_23-2148666303.jpg?t=st=1651511054~exp=1651511654~hmac=3e820c1e51578e4015b661213c0071ff67ab9ccb6f9ad497858f0822ecd1378e&w=740" alt="image">
-
-    <div class="mainSubtitle">View and create maps with points of interest</div>
-
-  </header>
-
-  <table class="table">
-
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% for (const map of maps) {%>
-      <tr>
-        <td><%=map.id%></td>
-        <td><a href="/maps/<%= map.id%>"> <%=map.title%></a></td>
-        <td><%=map.description%></td>
-        <%if (map.user_id == userid) { %>
-        <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
-          <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
-        </form></td>
-        <% } %>
-      </tr>
-      <%}%>
-    </tbody>
-
-  </table>
+    <form action="/users/login" method="POST">
+      <div class="form-group mb-2">
+        <label for="userid">Enter your USER ID</label>
+        <input class="form-control" type="text" name="userid" placeholder="1" style="width: 300px">
 
 
+
+      </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+
+    </form>
+  </main>
 
 
   <!-- Bootstrap JS -->

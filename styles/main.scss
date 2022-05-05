@@ -22,7 +22,7 @@ header {
 
 //Styling for picture and title on See All Maps Page
 
-header img {
+header .mainpageimage {
   height: 75%;
   display: block;
   margin-top: 1em;
@@ -52,58 +52,12 @@ table.table {
   width: 95vw;
 }
 //Styling for form to create new map
-form {
+.map-form {
   margin: 3vw 10vw 3vw 10vw;
 }
 //Styling for div containing the delete button on all maps list
 td form {
   margin: 0px;
-}
-//Styling for top navigation bar NOTHING ELSE BELOW
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-.topnav .icon {
-  display: none;
-}
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-//Styling for responsive top navigation bar
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
 }
 
 //Format for form to create new map
@@ -127,5 +81,72 @@ td form {
   display: flex;
   justify-content: center;
 }
+
+
+//Styling for top navigation bar NOTHING ELSE BELOW
+.topnav, .topnav button {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav button {
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: none;
+}
+
+.topnav a, .topnav button {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover, .topnav button:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+.topnav .icon {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {
+    display: none;
+  }
+
+  .topnav button {
+    display: none;
+  }
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+//Styling for responsive top navigation bar
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a, .topnav.responsive button {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
 
 

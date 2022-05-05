@@ -1,4 +1,4 @@
-// Client facing scripts here
+// // Client facing scripts here
 
 // const showAllMaps = function(mapsData) {
 // const $maps = $(
