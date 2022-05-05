@@ -92,7 +92,14 @@ module.exports = (db) => {//rendering a newmap page
    router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.id AS point_id, users.id AS user_id
+
+      `SELECT maps.title AS map_title, 
+      maps.description AS map_description, 
+      points.title AS point_title, 
+      points.description AS point_description, 
+      maps.id AS map_id, points.latitude, 
+      points.longitude, 
+      points.image AS point_image
     FROM maps
     LEFT JOIN points ON maps.id = points.map_id
     LEFT JOIN users ON users.id = maps.created_by
@@ -100,8 +107,13 @@ module.exports = (db) => {//rendering a newmap page
     )
       .then((data) => {
         const mapPoints = data.rows;
+
         const userid = req.session.userid;
-        res.render("viewMap", { mapPoints, userid });
+        res.render("viewMap", { mapPoints, userid, mapId });
+      
+//         console.log(mapPoints)
+//         res.render("viewMap", { mapPoints, mapId });
+
       })
       .catch((err) => {
         console.log(err);
