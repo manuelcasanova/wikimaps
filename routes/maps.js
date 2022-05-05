@@ -57,9 +57,9 @@ module.exports = (db) => {//rendering a newmap page
    })
   })
 
-  router.get("/:id/points", (req, res) => {//to get the points from db
-
-    db.query(`select points.latitude,
+    //to get the points from db, LEFT JOIN allows join table while points row is NULL
+  router.get("/:id/points", (req, res) => {
+    db.query(`SELECT maps.title AS map_title, points.latitude,
     points.longitude, points.id,
     points.title,
     points.description,
@@ -67,8 +67,10 @@ module.exports = (db) => {//rendering a newmap page
     points.created_by,
     points.map_id,
     points.created_at,
-    points.deleted_at from points
-    where points.map_id=${req.params.id};`)
+    points.deleted_at
+    FROM maps
+    LEFT JOIN points ON maps.id = points.map_id
+    WHERE maps.id=${req.params.id};`)
 
     .then(data => {
       const points = data.rows;
@@ -90,9 +92,10 @@ module.exports = (db) => {//rendering a newmap page
    router.get("/:id", (req, res) => {
     const mapId = req.params.id;
     db.query(
-      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id
+      `SELECT maps.title AS map_title, maps.description AS map_description, points.title AS point_title, points.description AS point_description, maps.id AS map_id, points.id AS point_id, users.id AS user_id
     FROM maps
-    JOIN points ON maps.id = points.map_id
+    LEFT JOIN points ON maps.id = points.map_id
+    LEFT JOIN users ON users.id = maps.created_by
     WHERE maps.id = $1;`, [mapId]
     )
       .then((data) => {

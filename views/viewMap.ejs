@@ -42,10 +42,12 @@
 
   <main style="margin: 1em;">
 
-    <div class="onemaptitle">
+    <div class="maptitle">
 
-      <h2 id="map_title"><%= mapPoints.length > 0 ? mapPoints[0].map_title  : "NAME OF MAP SHOULD GO HERE"%></h2>
-
+        <h2 id="map_title"><%= mapPoints[0].map_title %></h2>
+        <% if (mapPoints.user_id) {%>
+        <p> <a href="/maps/<%= mapPoints[0].map_id %>/points"> Create/Edit Points</a> </p>
+        <%}%>
       </div>
 
 
@@ -76,9 +78,6 @@
       <td><%=point.point_title%></td>
       <td><%=point.point_description%></td>
       <td><%=point.user_name%></td>
-      <td><form method="GET" action="/maps/<%= point.map_id %>/points">
-        <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Edit</button>
-      </form></td>
     </tr>
     <%}%>
 
