@@ -75,8 +75,10 @@ module.exports = (db) => {//rendering a newmap page
     points.created_by,
     points.map_id,
     points.created_at,
-    points.deleted_at
+    points.deleted_at,
+    users.name AS user_name
     FROM maps
+    LEFT JOIN users ON users.id = maps.created_by
     LEFT JOIN points ON maps.id = points.map_id
     WHERE maps.id=${req.params.id};`)
 
@@ -107,7 +109,8 @@ module.exports = (db) => {//rendering a newmap page
       points.description AS point_description,
       maps.id AS map_id, points.latitude,
       points.longitude,
-      points.image AS point_image
+      points.image AS point_image,
+      users.name AS point_createdby
     FROM maps
     LEFT JOIN points ON maps.id = points.map_id
     LEFT JOIN users ON users.id = maps.created_by

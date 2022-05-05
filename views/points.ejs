@@ -164,13 +164,15 @@ L.Control.geocoder().addTo(map);
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Image</th>
-      <th scope="col">Created by</th>
+      <th scope="col">User ID</th>
+      <th scope="col">User</th>
       <th scope="col">Map ID</th>
       <th scope="col">Created at</th>
       <th scope="col">Deleted at</th>
     </tr>
   </thead>
   <tbody>
+    <!--Related to points.js const Points-->
     <% for (const point of points) {%>
     <tr>
       <td><%=point.id%></td>
@@ -178,6 +180,7 @@ L.Control.geocoder().addTo(map);
       <td><%=point.description%></td>
       <td><img src="<%=point.image%>" style="width: 40px;"></td>
       <td><%=point.created_by%></td>
+      <td><%=point.user_name%></td>
       <td><%=point.map_id%></td>
       <td><%=point.created_at%></td>
       <td><%=point.deleted_at%></td>
