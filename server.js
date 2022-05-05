@@ -60,7 +60,14 @@ app.use("/maps", pointRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  db.query(`select maps.id, maps.title, maps.description from maps;`)
+  db.query(`SELECT
+  users.id AS user_id,
+  maps.id,
+  maps.title,
+  maps.description
+  FROM maps
+  LEFT JOIN users on users.id = maps.created_by
+  ;`)
   .then(data => {
     const maps = data.rows;
     const userid = req.session.userid;
