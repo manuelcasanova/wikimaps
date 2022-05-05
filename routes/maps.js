@@ -14,8 +14,9 @@ db.connect();
 //   return router;
 // };
 
-const addMap = function(db, map) {//adding map to db, so far without a user, used in a "post" below
-  const queryParams = [map.title, map.description, 1];
+const addMap = function(db, map, userid) {//adding map to db, so far without a user, used in a "post" below
+
+  const queryParams = [map.title, map.description, userid];
   //we are passing 1 as a "created_by" for now, but we need to change to a dynamic user id later
   let queryString = ` INSERT INTO maps (
     title,
@@ -45,7 +46,12 @@ module.exports = (db) => {//rendering a newmap page
 //saving a map
   router.post("/new", (req, res) => {//post method to save maps to db, using a function wrriten above
     console.log("this is reqbody:", req.body)
-    addMap(db, req.body).then(result => {
+    const userid = req.session.userid;
+    if (!userid) {
+      // reject add map
+      return;
+    }
+    addMap(db, req.body, userid).then(result => {
       console.log({ result })
       res.redirect(`/maps/${result.id}/points`)
     })
@@ -93,12 +99,12 @@ module.exports = (db) => {//rendering a newmap page
     const mapId = req.params.id;
     db.query(
 
-      `SELECT maps.title AS map_title, 
-      maps.description AS map_description, 
-      points.title AS point_title, 
-      points.description AS point_description, 
-      maps.id AS map_id, points.latitude, 
-      points.longitude, 
+      `SELECT maps.title AS map_title,
+      maps.description AS map_description,
+      points.title AS point_title,
+      points.description AS point_description,
+      maps.id AS map_id, points.latitude,
+      points.longitude,
       points.image AS point_image
     FROM maps
     LEFT JOIN points ON maps.id = points.map_id
@@ -110,7 +116,7 @@ module.exports = (db) => {//rendering a newmap page
 
         const userid = req.session.userid;
         res.render("viewMap", { mapPoints, userid, mapId });
-      
+
 //         console.log(mapPoints)
 //         res.render("viewMap", { mapPoints, mapId });
 
