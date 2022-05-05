@@ -53,7 +53,7 @@
 
     <div class="maptitle">
 
-        <h2 id="map_title"><%= mapPoints[0].map_title %></h2>
+      <h2 id="map_title"><%= mapPoints[0].map_title %> - Map created by <%= mapPoints[0].point_createdby %></h2>
         <!-- Only want logged in users to be able to edit/create points on maps -->
         <% if (userid) {%>
         <p> <a href="/maps/<%= mapPoints[0].map_id %>/points"> Create/Edit Points</a> </p>
