@@ -155,7 +155,7 @@ L.Control.geocoder().addTo(map);
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">User</th>
+      <th scope="col">Image</th>
     </tr>
   </thead>
   <tbody>
@@ -163,7 +163,7 @@ L.Control.geocoder().addTo(map);
     <tr>
       <td><%=point.point_title%></td>
       <td><%=point.point_description%></td>
-      <td><%=point.user_name%></td>
+      <td><img src="<%=point.point_image%>" style="width: 40px;"></td>
     </tr>
     <%}%>
 
