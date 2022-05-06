@@ -37,8 +37,8 @@
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
-  <h3>Hey <%=userRows[0].name%>! What are you looking for?</h3>
-  <h4>Your m4ps</h4>
+  <div class="profileTitle">Hey <%=userRows[0].name%>! What are you looking for?</div>
+  <div class="profileSubtitle"><h4>Your m4ps</h4></div>
   <table class="table">
     <thead>
       <tr>
@@ -62,7 +62,7 @@
     </tbody>
   </table>
 
-<h4>Your p0ints</h4>
+  <div class="profileSubtitle"><h4>Your added p0ints</h4></div>
   <table class="table">
     <thead>
       <tr>
