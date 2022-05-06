@@ -99,11 +99,39 @@ header .mainpageimage {
 
 
 //Styling for list of all maps on the main page
+//Styling for list of all maps on the main page
 table.table {
   margin-top: 120px;
   min-width: 350px;
-  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+}
+
+table.profilepointtable, table.profilemaptable {
+  // min-width: 350px;
+  text-align: center;
+  // margin-left: auto;
+  // margin-right: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#profilepointtable tr:nth-child(even){background-color: #f2f2f2;}
+
+#profilepointtable tr:hover {background-color: #ddd;}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #11045a;
+  color: white;
 }
 
 

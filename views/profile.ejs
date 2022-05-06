@@ -39,7 +39,7 @@
   <%- include('partials/_header') %>
   <div class="profileTitle">Hey <%=userRows[0].name%>! What are you looking for?</div>
   <div class="profileSubtitle"><h4>Your m4ps</h4></div>
-  <table class="table">
+  <table class="profilemaptable">
     <thead>
       <tr>
         <th scope="col">Title</th>
@@ -51,11 +51,9 @@
     <tbody>
       <% for (const user of userRows) {%>
       <tr>
-
         <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
         <td><%=user.map_description%></td>
         <!-- <td></td> -->
-
         <%}%>
       </tr>
 
@@ -63,25 +61,23 @@
   </table>
 
   <div class="profileSubtitle"><h4>Your added p0ints</h4></div>
-  <table class="table">
+  <table class="profilepointtable">
     <thead>
       <tr>
         <th scope="col">Image</th>
         <th scope="col">Point Name</th>
         <th scope="col">Description</th>
-        <!-- <th scope="col">&nbsp;</th> -->
+        <th scope="col">Map</th>
       </tr>
     </thead>
-    <tbody>
       <% for (const user of userRows) {%>
       <tr>
         <td><img src="<%=user.point_image%>" style="width: 40px;"></td>
         <td><%=user.point_title%></td>
         <td><%=user.point_description%></td>
-         <!-- <td></td> -->
+        <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
       </tr>
       <%}%>
-    </tbody>
   </table>
 
 
