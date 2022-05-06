@@ -84,6 +84,7 @@ module.exports = (db) => {//rendering a newmap page
 
     .then(data => {
       const points = data.rows;
+      console.log(points)
       const userid = req.session.userid;
       console.log("this is points: ", points)
       // res.json({ maps });

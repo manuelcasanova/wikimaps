@@ -50,7 +50,7 @@
     for (let point of points) {
       var marker = L.marker([point.latitude, point.longitude]).addTo(map);//looping the points we have in db
       marker.on('click', () =>  {
-        map.setView([point.latitude, point.longitude], 5)
+        map.setView([point.latitude, point.longitude], 13)
       });
       marker.bindPopup(`
       <div><b>${point.title}</b></div>
@@ -65,7 +65,11 @@
     //loop the points
     //create a marker for each point
     //add it to the map with .addTo(map)
+
     console.log(points);//to see array with points in your browser console
+
+
+
   });
   </script>
 </head>
@@ -81,18 +85,20 @@
     </div>
     <div id="map"></div>
     <script>
+//start
       //setting starting point for when points are defined (we will use the very first point coordinates)
       // and for when the points do not exist in a given map
-      // let starting = points.length > 0 ? [points[0].latitude, points[0].longitude] : [43.64249365536619, -79.38716085857133]
+      let starting = points[0]?.longitude ? [points[0].latitude, points[0].longitude] : [49.109838, -34.946894]
       // var map = L.map('map').setView(starting, 2.5);
-
-      var map = L.map('map').setView([50.527397, -31.857156], 2);
+      console.log("Points from the map side", starting)
+      // points[0].latitude, points[0].longitude
+      var map = L.map('map').setView(starting, 3);
     // map.on('popupopen', function (popup) {
     //   map.setZoom(5);
     // });
     //when we are closing a pop up we want to zoom out
     map.on('popupclose', function (popup) {
-      map.setZoom(2.5);
+      map.setZoom(3);
     });
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
