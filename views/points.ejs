@@ -44,7 +44,8 @@
 
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-  <script>var points = <%- JSON.stringify(points); %>//creates points var inside java script from ejs
+  <script>var points = <%- JSON.stringify(points); %>
+  //creates points var inside java script from ejs
   //https://stackoverflow.com/questions/11024840/ejs-versus
   $(function() {//$ is document ready
     for (let point of points) {
@@ -81,6 +82,7 @@
     <div class="maptitle">
 
       <h2 id="map_title"><%= points[0].map_title %></h2>
+      <div id="map_subtitle">Map created by <%= points[0].user_name %></div>
 
     </div>
     <div id="map"></div>
@@ -172,13 +174,10 @@ L.Control.geocoder().addTo(map);
       <th scope="col">Image</th>
       <th scope="col">User ID</th>
       <th scope="col">User</th>
-      <th scope="col">Map ID</th>
-      <th scope="col">Created at</th>
-      <th scope="col">Deleted at</th>
     </tr>
   </thead>
   <tbody>
-    <!--Related to points.js const Points-->
+    <!--Related to maps.js const Points-->
     <% for (const point of points) {%>
     <tr>
       <td><%=point.id%></td>
@@ -187,10 +186,7 @@ L.Control.geocoder().addTo(map);
       <td><img src="<%=point.image%>" style="width: 40px;"></td>
       <td><%=point.created_by%></td>
       <!--We don't want user_name here but name of user who created-->
-      <td>Check code</td>
-      <td><%=point.map_id%></td>
-      <td><%=point.created_at%></td>
-      <td><%=point.deleted_at%></td>
+      <td><%=point.user_name%></td>
 
       <% if (point.created_by == userid) {%>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
