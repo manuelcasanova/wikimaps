@@ -187,7 +187,7 @@ L.Control.geocoder().addTo(map);
       <td><%=point.point_description%></td>
       <td><img src="<%=point.point_image%>" style="width: 40px;"></td>
       <!--Need to fix this. It does not show the name of the proper creator of the pin -->
-      <td>check code on viewMap.ejs for of loop</td>
+      <td><%=point.createdby%></td>
     </tr>
     <%}%>
 

@@ -176,7 +176,6 @@ L.Control.geocoder().addTo(map);
       <th scope="col">User</th>
       <th scope="col">Map ID</th>
       <th scope="col">Created at</th>
-      <th scope="col">Deleted at</th>
     </tr>
   </thead>
   <tbody>
@@ -192,7 +191,6 @@ L.Control.geocoder().addTo(map);
       <td>Check code</td>
       <td><%=point.map_id%></td>
       <td><%=point.created_at%></td>
-      <td><%=point.deleted_at%></td>
 
       <% if (point.created_by == userid) {%>
       <td><form method="POST" action="/maps/points/<%= point.id %>/delete">
