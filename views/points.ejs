@@ -44,7 +44,8 @@
 
    <!-- Leaflet Geocoder JS -->
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-  <script>var points = <%- JSON.stringify(points); %>//creates points var inside java script from ejs
+  <script>var points = <%- JSON.stringify(points); %>
+  //creates points var inside java script from ejs
   //https://stackoverflow.com/questions/11024840/ejs-versus
   $(function() {//$ is document ready
     for (let point of points) {
@@ -81,6 +82,7 @@
     <div class="maptitle">
 
       <h2 id="map_title"><%= points[0].map_title %></h2>
+      <div id="map_subtitle">Map created by <%= points[0].user_name %></div>
 
     </div>
     <div id="map"></div>
