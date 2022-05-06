@@ -24,7 +24,7 @@
     <a href="/users/login">Create a New Map</a>
     <%} else {%>
       <a href="/maps/new">Create a New Map</a>
-      <a href="/profile/<%= userid %>">Logged in as <%= userid %></a>
+      <a href="/users/profile/<%= userid %>">Hi <%= userid %></a>
       <%}%>
 
   <%if (!userid) {%>
