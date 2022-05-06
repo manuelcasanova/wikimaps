@@ -40,22 +40,25 @@
 
     <thead>
       <tr>
-        <th scope="col">Image</th>
+
         <th scope="col">Title</th>
         <th scope="col">Description</th>
       </tr>
+
+      <h2>Welcome <%=userRows[0].name%></h2>
     </thead>
 
     <tbody>
+      <% for (const user of userRows) {%>
       <tr>
-        <td>map name here</td>
-        <td>map name here</td>
-        <td>map descrition here</td>
+
+        <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
+        <td><%=user.map_description%></td>
 
         <td></td>
 
       </tr>
-
+      <%}%>
     </tbody>
 
   </table>
