@@ -12,9 +12,14 @@ const router  = express.Router();
 const queryString = `SELECT users.*,
   maps.id AS map_id,
   maps.title AS map_title,
-  maps.description AS map_description
+  maps.description AS map_description,
+  points.title AS point_title,
+  points.image AS point_image,
+  points.description AS point_description,
+  points.map_id AS on_map
   FROM users
   LEFT JOIN maps ON users.id = maps.created_by
+  LEFT JOIN points ON users.id = points.created_by
   WHERE users.id = $1;`;
 
 
