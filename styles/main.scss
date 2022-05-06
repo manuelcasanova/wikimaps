@@ -7,6 +7,17 @@ main {
   height: 60vh;
 }
 
+//Style for profile page
+.profileTitle {
+  text-align: center;
+  margin: 1em;
+  font-size: 40px;
+}
+.profileSubtitle {
+  text-align: center;
+  margin: 1.5em;
+}
+
 //Style for title of map in /maps/:id
 .maptitle {
   margin: 1em;
