@@ -44,16 +44,21 @@
       <tr>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
+        <!-- <th scope="col">&nbsp;</th> -->
       </tr>
     </thead>
+
     <tbody>
       <% for (const user of userRows) {%>
       <tr>
+
         <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
         <td><%=user.map_description%></td>
-        <td></td>
+        <!-- <td></td> -->
+
+        <%}%>
       </tr>
-      <%}%>
+
     </tbody>
   </table>
 
@@ -64,6 +69,7 @@
         <th scope="col">Image</th>
         <th scope="col">Point Name</th>
         <th scope="col">Description</th>
+        <!-- <th scope="col">&nbsp;</th> -->
       </tr>
     </thead>
     <tbody>
@@ -72,7 +78,7 @@
         <td><img src="<%=user.point_image%>" style="width: 40px;"></td>
         <td><%=user.point_title%></td>
         <td><%=user.point_description%></td>
-        <td></td>
+         <!-- <td></td> -->
       </tr>
       <%}%>
     </tbody>
