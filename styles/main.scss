@@ -1,27 +1,61 @@
 body {
-  min-height: 90vh;
+  // min-height: 90vh;
 
 }
 
 main {
-  height: 50vh;
+  height: 60vh;
 }
 
 //Style for title of map in /maps/:id
-.onemaptitle {
+.maptitle {
+  margin: 1em;
+  text-align: center;
+}
 
+#map_subtitle {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+#createpoints {
+  text-decoration: none;
+  color: inherit;
 }
 
 #map {
-  height: 100%;
+  height: 65%;
   margin-right: 3vw;
   margin-left: 3vw;
 }
 
 header {
-  margin-bottom: 10vh;
+  // margin-bottom: 10vh;
 }
 
+
+//Styling for edit map button
+
+.button {
+  background-color: #2e0ee4; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border-radius: 24px;
+}
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
 //Styling for picture and title on See All Maps Page
 
 header .mainpageimage {
@@ -49,7 +83,7 @@ header .mainpageimage {
 }
 //Styling for list of all maps on the main page
 table.table {
-  margin: 0px 16px 16px 16px;
+  margin: 16px;
   min-width: 350px;
   width: 95vw;
 }
@@ -117,7 +151,7 @@ td form {
   color: black;
 }
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #11045a;
   color: white;
 }
 .topnav .icon {
