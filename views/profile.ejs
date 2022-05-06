@@ -36,9 +36,49 @@
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
+  <h3>Hey <%=userRows[0].name%>! What are you looking for?</h3>
+  <h4>Your m4ps</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const user of userRows) {%>
+      <tr>
+        <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
+        <td><%=user.map_description%></td>
+        <td></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
 
-  <div>List of my favourite maps</div>
-  <div>List of my contributions</div>
+<h4>Your p0ints</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Point Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const user of userRows) {%>
+      <tr>
+        <td><img src="<%=user.point_image%>" style="width: 40px;"></td>
+        <td><%=user.point_title%></td>
+        <td><%=user.point_description%></td>
+        <td></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+
+
+
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
