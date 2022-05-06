@@ -59,22 +59,25 @@ header {
 //Styling for picture and title on See All Maps Page
 
 header .mainpageimage {
-  height: 75%;
-  display: block;
+  // height: 75%;
   margin-top: 1em;
   margin-bottom: 1em;
+  //to center
+  display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
   //To avoid resizing of image
-  min-width: 400px;
+  min-width: 425px;
   max-width: 450px;
+  //rounder border
+  border-radius: 48px;
 }
 
 .mainTitle {
   text-align: center;
   margin: 1em;
-  font-size: x-large;
+  font-size: xx-large;
 }
 .mainSubtitle {
   text-align: center;
@@ -86,6 +89,7 @@ table.table {
   margin: 16px;
   min-width: 350px;
   width: 95vw;
+  text-align: center;
 }
 
 
