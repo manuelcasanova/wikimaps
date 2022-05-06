@@ -51,12 +51,14 @@
 
   <main style="margin: 1em;">
 
+
     <div class="maptitle">
 
-      <h2 id="map_title"><%= mapPoints[0].map_title %> - Map created by <%= mapPoints[0].point_createdby %></h2>
+      <h2 id="map_title"><%= mapPoints[0].map_title %></h2>
+      <div id="map_subtitle">Map created by <%= mapPoints[0].point_createdby %></div>
         <!-- Only want logged in users to be able to edit/create points on maps -->
         <% if (userid) {%>
-        <p> <a href="/maps/<%= mapPoints[0].map_id %>/points"> Create/Edit Points</a> </p>
+          <button onclick="document.location='/maps/<%= mapPoints[0].map_id %>/points'" class="button button2">Edit map</button>
         <%}%>
 
        <!-- <h2 id="map_title"><%= mapPoints.length > 0 ? mapPoints[0].map_title  : "You have no pins added. Click on the map to select a location." %></h2> -->
@@ -166,6 +168,7 @@
 //searchbar function
 L.Control.geocoder().addTo(map);
 </script>
+</main>
 
 <table class="table">
   <thead>
@@ -188,7 +191,7 @@ L.Control.geocoder().addTo(map);
     </tr>
     <%}%>
 
-  </main>
+
 
 
     </tbody>
