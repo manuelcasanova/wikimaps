@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📍</text></svg>">
 
   <!-- Topnavbar -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -30,10 +31,9 @@
 
   <header>
 
-    <div class="mainTitle">Welcome to Wiki Maps</div>
-    <div class="mainSubtitle">View and create maps with points of interest</div>
-    <img class="mainpageimage" src="https://cdn.pixabay.com/photo/2017/08/17/07/47/travel-2650303_960_720.jpg" alt="image">
-
+    <div class="mainTitle"> <h1>Welcome to Wiki Maps 🗺️</h1></div>
+    <div class="mainSubtitle"> <h3>View and create maps with points of interest</h3></div>
+    <div class="pic-index"></div>><img class="mainpageimage" src="https://cdn.pixabay.com/photo/2017/08/17/07/47/travel-2650303_960_720.jpg" alt="image"></div>
 
 
   </header>
@@ -45,6 +45,7 @@
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
+        <th scope="col">Option</th>
       </tr>
     </thead>
 
@@ -54,11 +55,16 @@
         <td><%=map.id%></td>
         <td><a href="/maps/<%= map.id%>"> <%=map.title%></a></td>
         <td><%=map.description%></td>
-        <%if (map.user_id == userid) { %>
-        <td><form method="POST" action="/maps/new/<%= map.id %>/delete">
+
+<!-- we are putting a tablecell outisde the if statement to keep all the cells visible -->
+        <td>
+          <%if (map.user_id == userid) { %>
+          <form method="POST" action="/maps/new/<%= map.id %>/delete">
           <button type="submit" style="background-color:white; border-color:crimson; color:crimson" class="btn btn-primary">Delete</button>
-        </form></td>
+        </form>
         <% } %>
+      </td>
+
       </tr>
       <%}%>
     </tbody>

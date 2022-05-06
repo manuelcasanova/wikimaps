@@ -25,9 +25,10 @@ main {
 }
 
 #map {
-  height: 65%;
+  height: 80%;
   margin-right: 3vw;
   margin-left: 3vw;
+  margin-top: 4vw;
 }
 
 header {
@@ -60,8 +61,8 @@ header {
 
 header .mainpageimage {
   // height: 75%;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
   //to center
   display: block;
   margin-left: auto;
@@ -76,27 +77,29 @@ header .mainpageimage {
 
 .mainTitle {
   text-align: center;
-  margin: 0.5em;
-  font-size: 40px;
+  margin: 1em;
+  //font-size: 40px;
 }
 .mainSubtitle {
   text-align: center;
-  margin: 1em;
-  font-size: large;
+  margin: 1.5em;
+  //font-size: large;
 }
+
+
 //Styling for list of all maps on the main page
 table.table {
-  margin: 16px;
+  margin-top: 120px;
   min-width: 350px;
   width: 95vw;
   text-align: center;
 }
 
 
-//Styling for form to create new map
-.map-form {
-  margin: 3vw 10vw 3vw 10vw;
-}
+// //Styling for form to create new map
+// .map-form {
+//   margin: -3vw 10vw 3vw 10vw;
+// }
 //Styling for div containing the delete button on all maps list
 td form {
   margin: 0px;
@@ -104,7 +107,7 @@ td form {
 
 //Format for form to create new map
 .map-form {
-  margin: 3vw 10vw 3vw 10vw;
+  margin: -6vw 10vw 3vw 10vw;
 }
 
 //create a pin form
