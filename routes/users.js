@@ -8,19 +8,33 @@
 const express = require('express');
 const router  = express.Router();
 
+//Liam's Query
+// const queryString = `SELECT users.*,
+//   maps.id AS map_id,
+//   maps.title AS map_title,
+//   maps.description AS map_description,
+//   points.title AS point_title,
+//   points.image AS point_image,
+//   points.description AS point_description,
+//   points.map_id AS on_map
+//   FROM users
+//   LEFT JOIN maps ON users.id = maps.created_by
+//   LEFT JOIN points ON users.id = points.created_by
+//   WHERE users.id = $1;`;
 
-const queryString = `SELECT users.*,
-  maps.id AS map_id,
-  maps.title AS map_title,
-  maps.description AS map_description,
-  points.title AS point_title,
-  points.image AS point_image,
-  points.description AS point_description,
-  points.map_id AS on_map
-  FROM users
-  LEFT JOIN maps ON users.id = maps.created_by
-  LEFT JOIN points ON users.id = points.created_by
-  WHERE users.id = $1;`;
+//Manuel's query
+const queryString = `SELECT
+users.name,
+points.title AS point_title,
+points.image AS point_image,
+points.description AS point_description,
+maps.description AS map_description,
+maps.id AS map_id,
+maps.title AS map_title
+FROM points
+JOIN maps on maps.id = points.map_id
+JOIN users on users.id = points.created_by
+WHERE users.id = $1;`;
 
 
 module.exports = (db) => {
