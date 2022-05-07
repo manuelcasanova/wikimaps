@@ -37,7 +37,7 @@
 <!-- https://leafletjs.com/examples/quick-start/ add other things to your map, including markers, polylines, polygons, circles,-->
 <body>
   <%- include('partials/_header') %>
-  <div class="profileTitle">Hey <%=userRows[0].name%>! What are you looking for?</div>
+  <div class="profileTitle">Hey <%=data.pointsInfo[0].name%>! What are you looking for?</div>
   <div class="profileSubtitle"><h4>Your m4ps</h4></div>
   <table class="profilemaptable">
     <thead>
@@ -49,10 +49,12 @@
     </thead>
 
     <tbody>
-      <% for (const user of userRows) {%>
+      <% for (const user of data.mapsInfo) {%>
+
       <tr>
-        <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
+        <td><a href="/maps/<%=user.map_id%>"><%=user.map_title%></a></td>
         <td><%=user.map_description%></td>
+
         <!-- <td></td> -->
         <%}%>
       </tr>
@@ -70,7 +72,8 @@
         <th scope="col">Map</th>
       </tr>
     </thead>
-      <% for (const user of userRows) {%>
+  <thead>
+    <% for (const user of data.pointsInfo) {%>
       <tr>
         <td><img src="<%=user.point_image%>" style="width: 40px;"></td>
         <td><%=user.point_title%></td>
@@ -78,6 +81,8 @@
         <td><a href="/maps/<%= user.map_id%>"><%=user.map_title%></a></td>
       </tr>
       <%}%>
+      </thead>
+
   </table>
 
 
