@@ -25,7 +25,8 @@ const router  = express.Router();
 //Manuel's query
 const queryStringMaps = `SELECT
 maps.title AS map_title,
-maps.description AS map_description
+maps.description AS map_description,
+maps.id AS map_id
 FROM maps
 JOIN users ON users.id = maps.created_by
 WHERE users.id = $1`;
