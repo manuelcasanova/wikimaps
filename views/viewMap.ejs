@@ -76,12 +76,12 @@
 
     //var map = L.map('map').setView([50.527397, -31.857156], 3);
 
-    let starting = points[0]?.longitude ? [points[0].latitude, points[0].longitude] : [40.236572, -73.757544]
+    let starting = points[0]?.longitude ? [points[0].latitude, points[0].longitude] : [40.148791, -4.527198]
 
       // var map = L.map('map').setView(starting, 2.5);
       // console.log("Points fromt the map side", starting)
       // points[0].latitude, points[0].longitude
-      var map = L.map('map').setView(starting, 6);
+      var map = L.map('map').setView(starting, 10);
 
     /**
      * Check the map route and ensure it is sending the values to the view.(console.log would be very useful)
@@ -92,7 +92,7 @@
 
 
     map.on('popupclose', function (popup) {
-      map.setZoom(6);
+      map.setZoom(10);
     });
 
 

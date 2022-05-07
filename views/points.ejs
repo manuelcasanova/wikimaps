@@ -91,17 +91,17 @@
 //start
       //setting starting point for when points are defined (we will use the very first point coordinates)
       // and for when the points do not exist in a given map
-      let starting = points[0]?.longitude ? [points[0].latitude, points[0].longitude] : [49.109838, -34.946894]
+      let starting = points[0]?.longitude ? [points[0].latitude, points[0].longitude] : [42.650671, -75.610861]
       // var map = L.map('map').setView(starting, 2.5);
       console.log("Points from the map side", starting)
       // points[0].latitude, points[0].longitude
-      var map = L.map('map').setView(starting, 3);
+      var map = L.map('map').setView(starting, 10);
     // map.on('popupopen', function (popup) {
     //   map.setZoom(5);
     // });
     //when we are closing a pop up we want to zoom out
     map.on('popupclose', function (popup) {
-      map.setZoom(3);
+      map.setZoom(10);
     });
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
