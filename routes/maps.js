@@ -34,6 +34,44 @@ const deleteMAP = function(db, id) {
   return db.query(queryString, queryParams).then((res) => res.rows[0]);
 };
 
+const queryStringMaps = `SELECT
+  maps.title AS map_title,
+  maps.description AS map_description,
+  users.name AS user_name
+  FROM maps
+  JOIN users ON users.id = maps.created_by
+  WHERE users.id = $1`;
+
+const queryStringPoints = `SELECT maps.title AS map_title, points.latitude,
+    points.longitude, points.id,
+    points.title,
+    points.description,
+    points.image,
+    points.created_by,
+    points.map_id,
+    points.created_at,
+    points.deleted_at,
+    users.name AS user_name
+    FROM maps
+    LEFT JOIN points ON maps.id = points.map_id
+    LEFT JOIN users ON users.id = points.created_by
+    WHERE maps.id=$1;`
+
+
+const altQuery = `select points.id,
+points.latitude,
+points.longitude,
+points.title,
+points.created_by,
+points.image,
+points.description,
+users.name AS user_name,
+maps.id AS map_id
+from points
+join users on users.id= points.created_by
+join maps on maps.id = points.map_id
+where maps.id = $1;`;
+
 module.exports = (db) => {//rendering a newmap page
   router.get("/new", (req, res) => {//app.use("/maps", mapRoutes(db)); from server file is a base, then we add /new
     const userid = req.session.userid;
@@ -67,29 +105,20 @@ module.exports = (db) => {//rendering a newmap page
 
     //to get the points from db, LEFT JOIN allows join table while points row is NULL
   router.get("/:id/points", (req, res) => {
-    db.query(`SELECT maps.title AS map_title, points.latitude,
-    points.longitude, points.id,
-    points.title,
-    points.description,
-    points.image,
-    points.created_by,
-    points.map_id,
-    points.created_at,
-    points.deleted_at,
-    users.name AS user_name
-    FROM maps
-    LEFT JOIN points ON maps.id = points.map_id
-    LEFT JOIN users ON users.id = points.created_by
-    WHERE maps.id=${req.params.id};`)
 
-    .then(data => {
-      const points = data.rows;
-      console.log(points)
-      const userid = req.session.userid;
-      console.log("this is points: ", points)
-      // res.json({ maps });
-      res.render("points", { mapId: req.params.id, points, userid } );
-
+    const userid = req.session.userid;
+    Promise.all([
+      db.query(altQuery, [req.params.id]),
+        db.query(queryStringMaps, [userid])
+      ])
+      .then(([res1, res2]) => {
+        console.log('this is res1: ', res1)
+        return {
+        pointsInfo: res1.rows,
+        mapsInfo: res2.rows
+      }}
+      ).then(data => {
+      res.render("points", { mapId: req.params.id, data, userid });
     })
     .catch(err => {
       console.log(err);
