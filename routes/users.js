@@ -22,7 +22,14 @@ const router  = express.Router();
 //   LEFT JOIN points ON users.id = points.created_by
 //   WHERE users.id = $1;`;
 
-//Manuel's query
+//Manuel's query to show also the name of the map on the list of points of user in the profile
+const queryStringMaps = `SELECT
+  maps.title AS map_title,
+  maps.description AS map_description
+  FROM maps
+  JOIN users ON users.id = maps.created_by
+  WHERE users.id = $1`;
+
 const queryString = `SELECT
 users.name,
 points.title AS point_title,
@@ -35,6 +42,8 @@ FROM points
 JOIN maps on maps.id = points.map_id
 JOIN users on users.id = points.created_by
 WHERE users.id = $1;`;
+
+
 
 
 module.exports = (db) => {
@@ -72,11 +81,16 @@ module.exports = (db) => {
     // const signedInUser = req.params.id;
     const userid = req.session.userid;
 
-  db.query(queryString, [userid])
-    .then((res) => res.rows)
-      .then((data) => {
-        console.log('USER ROWS: ', data)
-        res.render("profile", { userRows:data, userid});
+    Promise.all([
+      db.query(queryString, [userid]),
+      db.query(queryStringMaps, [userid])
+    ])
+    .then(([res1, res2]) => ({
+      pointsInfo: res1.rows,
+      mapsInfo: res2.rows
+    })
+    ).then((data) => {
+        res.render("profile", { data, userid});
       })
       .catch((err) => {
         console.log(err);
